@@ -22,19 +22,19 @@ cd box64; mkdir build; cd build; cmake .. -DARM64=1 -DCMAKE_BUILD_TYPE=RelWithDe
 
 #Install Wine
 
-wget https://github.com/Kron4ek/Wine-Builds/releases/download/8.7/wine-8.7-x86.tar.xz
+wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.7/wine-9.7-x86.tar.xz
 
-wget https://github.com/Kron4ek/Wine-Builds/releases/download/8.7/wine-8.7-amd64.tar.xz
+wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.7/wine-9.7-amd64.tar.xz
 
-tar xvf wine-8.7-x86.tar.xz
+tar xvf wine-9.7-x86.tar.xz
 
-tar xvf wine-8.7-amd64.tar.xz
+tar xvf wine-9.7-amd64.tar.xz
 
-rm wine-8.7-x86.tar.xz wine-8.7-amd64.tar.xz
+rm wine-9.7-x86.tar.xz wine-9.7-amd64.tar.xz
 
-mv wine-8.7-x86 wine
+mv wine-9.7-x86 wine
 
-mv wine-8.7-amd64 wine64
+mv wine-9.7-amd64 wine64
 
 echo '
 export BOX86_PATH=~/wine/bin/

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script installs aarch64 .tar.xz or .tar.gz into debian proot /opt directory and creates a desktop and menu launcher
+#This script installs aarch64 .tar.xz or .tar.gz into ubuntu proot /opt directory and creates a desktop and menu launcher
 
 # Default values to edit
 #Enter URL to appimage
@@ -8,7 +8,7 @@ url="https://github.com/ArmCord/ArmCord/releases/download/v3.2.7/ArmCord_3.2.7_a
 #Enter name of app
 appname="armcord"
 #Enter path to icon or system icon name
-#/data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/debian
+#/data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/ubuntu
 icon_path="discord"
 #Enter Categories for .desktop
 category="Network"
@@ -38,15 +38,15 @@ if [ "$install" = true ]; then
     download="wget $url"
     install="prun sudo apt install -y "
 
-    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/home/*)
-    prun="proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
+    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+    prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
 
     $prun $download
     $install $depends
     $install ./${url##*/}
     $prun rm ${url##*/}
 
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/$dir"
+    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     desktop_file="$HOME/Desktop/$appname.desktop"
     binary=$(find "$installed_dir" -type f -executable -print -quit)
 

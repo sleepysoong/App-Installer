@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script installs aarch64 appimages into debian proot /opt directory and creates a desktop and menu launcher
+#This script installs aarch64 appimages into ubuntu proot /opt directory and creates a desktop and menu launcher
 
 # Default values to edit
 #Enter URL to apt repo
@@ -8,7 +8,7 @@ url="https://github.com/Stabyourself/mari0.git"
 #Enter package to install
 pkg="mari0"
 #Enter path to icon or system icon name
-icon_path="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/opt/mari0/graphics/icon.png"
+icon_path="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/opt/mari0/graphics/icon.png"
 #Enter Categories for .desktop
 category="Game"
 #Enter any dependencies
@@ -38,9 +38,9 @@ if [ "$install" = true ]; then
     clone="git clone $url"
     install="prun sudo apt install "
     
-    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/home/*)
-    prun="proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/$dir"
+    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+    prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
+    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     desktop_file="$HOME/Desktop/$pkg.desktop"
     
     $install $depends -y
@@ -70,7 +70,7 @@ echo "Installation completed."
 
 elif [ "$uninstall" = true ]; then
     echo "Uninstalling..."
-    rm -rf $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/opt/mari0
+    rm -rf $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/opt/mari0
     remove="prun sudo apt remove "
     $remove $depends -y 
     desktop_file="$HOME/Desktop/$pkg.desktop"

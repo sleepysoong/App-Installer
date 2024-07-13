@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script installs aarch64 appimages into debian proot /opt directory and creates a desktop and menu launcher
+#This script installs aarch64 appimages into ubuntu proot /opt directory and creates a desktop and menu launcher
 
 # Default values to edit
 #Enter URL to appimage
@@ -40,8 +40,8 @@ if [ "$install" = true ]; then
     extract="tar -xzf ${url##*/} -C $appname $strip" #-xvf is tar.xz or -xzf if tar.gz 
     dir="/opt/$appname"
 
-    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/home/*)
-    prun="proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
+    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+    prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
 
     $prun $download
     $prun mkdir -p $appname
@@ -49,7 +49,7 @@ if [ "$install" = true ]; then
     $prun mv $appname $dir
     $prun rm ${url##*/}
 
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/$dir"
+    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     desktop_file="$HOME/Desktop/$appname.desktop"
     binary=$(find "$installed_dir" -type f -executable -print -quit)
 
@@ -79,7 +79,7 @@ echo "Installation completed."
 elif [ "$uninstall" = true ]; then
     echo "Uninstalling..."
     dir="/opt/$appname"
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/$dir"
+    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     rm -rf "$installed_dir"
     desktop_file="$HOME/Desktop/$appname.desktop"
     rm "$desktop_file"

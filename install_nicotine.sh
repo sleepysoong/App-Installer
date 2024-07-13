@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#This script installs aarch64 appimages into debian proot /opt directory and creates a desktop and menu launcher
+#This script installs aarch64 appimages into ubuntu proot /opt directory and creates a desktop and menu launcher
 
 # Default values to edit
 #Enter URL to apt repo
@@ -38,9 +38,9 @@ if [ "$install" = true ]; then
     apt="sudo add-apt-repository $url"
     install="prun sudo apt install "
     
-    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/home/*)
-    prun="proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/$dir"
+    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+    prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
+    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     desktop_file="$HOME/Desktop/$pkg.desktop"
     
     $install $depends -y
