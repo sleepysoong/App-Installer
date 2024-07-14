@@ -6,7 +6,7 @@ varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 script_dir=$(realpath "$(dirname "$0")")
 
 # Absolute paths for required files and directories
-installed_rootfs_dir="/usr/var/lib/proot-distro/installed-rootfs/ubuntu/home"
+installed_rootfs_dir="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home"
 freetube_desktop="$PREFIX/share/applications/freetube.desktop"
 tor_desktop="$PREFIX/share/applications/tor.desktop"
 webcord_desktop="$PREFIX/share/applications/webcord.desktop"
