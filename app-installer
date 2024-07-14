@@ -3,5 +3,5 @@
 cd $HOME/program/App-Installer
 git reset --hard HEAD
 git pull
-chmod +x *
-./install.sh
+chmod +x $HOME/program/App-Installer/*
+. $HOME/program/App-Installer/install.sh
