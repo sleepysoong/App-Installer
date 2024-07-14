@@ -1,12 +1,12 @@
 #!/bin/bash
 
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/debian/home/*)
+varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 # Get the absolute path for the script's directory
 script_dir=$(realpath "$(dirname "$0")")
 
 # Absolute paths for required files and directories
-installed_rootfs_dir="/usr/var/lib/proot-distro/installed-rootfs/debian/home"
+installed_rootfs_dir="/usr/var/lib/proot-distro/installed-rootfs/ubuntu/home"
 freetube_desktop="$HOME/../usr/share/applications/freetube.desktop"
 tor_desktop="$HOME/../usr/share/applications/tor.desktop"
 webcord_desktop="$HOME/../usr/share/applications/webcord.desktop"
@@ -489,7 +489,7 @@ install_thorium() {
 
 remove_freetube() {
     if [ -e "$freetube_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove freetube
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove freetube
         rm "$HOME/Desktop/freetube.desktop"
         rm "$freetube_desktop"
         zenity --info --title="Removal Complete" --text="FreeTube has been removed successfully."
@@ -500,7 +500,7 @@ remove_freetube() {
 
 remove_tor_browser() {
     if [ -e "$tor_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf tor-browser
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf tor-browser
         rm "$HOME/Desktop/tor.desktop"
         rm "$tor_desktop"
         zenity --info --title="Removal Complete" --text="Tor Browser has been removed successfully."
@@ -511,7 +511,7 @@ remove_tor_browser() {
 
 remove_webcord() {
     if [ -e "$webcord_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove webcord
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove webcord
         rm "$HOME/Desktop/webcord.desktop"
         rm "$webcord_desktop"
         zenity --info --title="Removal Complete" --text="Webcord has been removed successfully."
@@ -522,8 +522,8 @@ remove_webcord() {
 
 remove_vivaldi() {
     if [ -e "$vivaldi_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt-mark unhold vivaldi-stable
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove vivaldi-stable -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt-mark unhold vivaldi-stable
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove vivaldi-stable -y
         rm "$HOME/Desktop/vivaldi.desktop"
         rm "$vivaldi_desktop"
         zenity --info --title="Removal Complete" --text="Vivaldi has been removed successfully."
@@ -534,8 +534,8 @@ remove_vivaldi() {
 
 remove_brave() {
     if [ -e "$brave_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove brave-browser -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /etc/apt/sources.list.d/brave-browser-release.list
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove brave-browser -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /etc/apt/sources.list.d/brave-browser-release.list
         rm "$HOME/Desktop/brave.desktop"
         rm "$brave_desktop"
         zenity --info --title="Removal Complete" --text="Brave has been removed successfully."
@@ -546,9 +546,9 @@ remove_brave() {
 
 remove_obsidian() {
     if [ -e "$obsidian_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/Obsidian
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf .config/obsidian
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf Obsidian\ Vault
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/Obsidian
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf .config/obsidian
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf Obsidian\ Vault
         rm "$HOME/Desktop/obsidian.desktop"
         rm "$obsidian_desktop"
         zenity --info --title="Removal Complete" --text="Obsidian has been removed successfully."
@@ -559,8 +559,8 @@ remove_obsidian() {
 
 remove_libreoffice() {
     if [ -e "$libreoffice_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove libreoffice -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove libreoffice -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/../usr/share/applications/libreoffice*"
         rm "$libreoffice_desktop"
         zenity --info --title="Removal Complete" --text="Libreoffice has been removed successfully."
@@ -571,8 +571,8 @@ remove_libreoffice() {
 
 remove_code() {
     if [ -e "$code_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove code -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove code -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/../usr/share/applications/code.desktop"
         rm "$HOME/Desktop/code.desktop"
         rm "$code_desktop"
@@ -584,8 +584,8 @@ remove_code() {
 
 remove_vlc() {
     if [ -e "$vlc_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove vlc -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove vlc -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$vlc_desktop"
         zenity --info --title="Removal Complete" --text="VLC has been removed successfully."
     else
@@ -595,7 +595,7 @@ remove_vlc() {
 
 remove_notion() {
     if [ -e "$notion_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf notion
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf notion
         rm "$HOME/Desktop/notion.desktop"
         rm "$notion_desktop"
         zenity --info --title="Removal Complete" --text="Notion has been removed successfully."
@@ -606,7 +606,7 @@ remove_notion() {
 
 remove_pycharm() {
     if [ -e "$pycharm_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/pycharm-community
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/pycharm-community
         rm "$HOME/Desktop/pycharm.desktop"
         rm "$pycharm_desktop"
         zenity --info --title="Removal Complete" --text="PyCharm has been removed successfully."
@@ -617,8 +617,8 @@ remove_pycharm() {
 
 remove_remarkable() {
     if [ -e "$remarkable_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove remarkable -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove remarkable -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/remarkable.desktop"
         rm "$remarkable_desktop"
         zenity --info --title="Removal Complete" --text="Remarkable has been removed successfully."
@@ -629,7 +629,7 @@ remove_remarkable() {
 
 remove_shatteredpd() {
     if [ -e "$shatteredpd_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/ShatteredPD
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/ShatteredPD
         rm "$HOME/Desktop/shatteredpd.desktop"
         rm "$shatteredpd_desktop"
         zenity --info --title="Removal Complete" --text="Shattered Pixel Dungeon has been removed successfully."
@@ -640,7 +640,7 @@ remove_shatteredpd() {
 
 remove_el() {
     if [ -e "$el_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf eternallands
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf eternallands
         rm "$HOME/Desktop/el.desktop"
         rm "$el_desktop"
         zenity --info --title="Removal Complete" --text="Eternal Lands has been removed successfully."
@@ -651,7 +651,7 @@ remove_el() {
 
 remove_librewolf() {
     if [ -e "$librewolf_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/librewolf
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/librewolf
         rm "$HOME/Desktop/librewolf.desktop"
         rm "$librewolf_desktop"
         zenity --info --title="Removal Complete" --text="ibrewolf has been removed successfully."
@@ -662,7 +662,7 @@ remove_librewolf() {
 
 remove_unciv() {
     if [ -e "$unciv_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/games/Unciv.jar
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/games/Unciv.jar
         rm "$HOME/Desktop/unciv.desktop"
         rm "$unciv_desktop"
         zenity --info --title="Removal Complete" --text="Unciv has been removed successfully."
@@ -673,7 +673,7 @@ remove_unciv() {
 
 remove_diablo() {
     if [ -e "$diablo_desktop" ]; then
-        rm -rf ../usr/var/lib/proot-distro/installed-rootfs/debian/opt/devilutionx
+        rm -rf ../usr/var/lib/proot-distro/installed-rootfs/ubuntu/opt/devilutionx
         rm "$HOME/Desktop/diablo.desktop"
         rm "$diablo_desktop"
         zenity --info --title="Removal Complete" --text="DevilutionX has been removed successfully."
@@ -684,8 +684,8 @@ remove_diablo() {
 
 remove_element() {
     if [ -e "$element_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove element-desktop -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove element-desktop -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/element.desktop"
         rm "$element_desktop"
         zenity --info --title="Removal Complete" --text="Element has been removed successfully."
@@ -696,8 +696,8 @@ remove_element() {
 
 remove_prism() {
     if [ -e "$prism_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove prismlauncher -y
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove prismlauncher -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/prism.desktop"
         rm "$prism_desktop"
         zenity --info --title="Removal Complete" --text="Prism Launcher has been removed successfully."
@@ -708,9 +708,9 @@ remove_prism() {
 
 remove_wine() {
     if [ -e "$wine_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine wine64 .wine32 .wine64
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine64
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine wine64 .wine32 .wine64
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine64
         rm "$HOME/Desktop/wine32.desktop"
         rm "$HOME/Desktop/wine64.desktop"
         rm "$HOME/../usr/share/applications/wine32.desktop"
@@ -723,7 +723,7 @@ remove_wine() {
 
 remove_runelite() {
     if [ -e "$runelite_desktop" ]; then
-        proot-distro login debian --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/RuneLite
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/RuneLite
         rm "$HOME/Desktop/runelite.desktop"
         rm "$runelite_desktop"
         zenity --info --title="Removal Complete" --text="RuneLite has been removed successfully."
