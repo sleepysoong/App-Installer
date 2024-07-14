@@ -1,6 +1,6 @@
 #!/bin/bash
 
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 mv brave-browser-archive-keyring.gpg /usr/share/keyrings
@@ -30,4 +30,4 @@ Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 
 " > $HOME/Desktop/brave.desktop
 
 chmod +x $HOME/Desktop/brave.desktop
-cp $HOME/Desktop/brave.desktop $HOME/../usr/share/applications/brave.desktop 
+cp $HOME/Desktop/brave.desktop $PREFIX/share/applications/brave.desktop 
