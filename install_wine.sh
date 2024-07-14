@@ -1,8 +1,8 @@
 #!/bin/bash
 
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-cp $HOME/.App-Installer/wine.sh $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname
+cp $HOME/program/App-Installer/wine.sh $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 ./wine.sh
 
 
@@ -18,7 +18,7 @@ Path=
 Terminal=false
 StartupNotify=true" > $HOME/Desktop/wine32.desktop
 chmod +x $HOME/Desktop/wine32.desktop
-cp $HOME/Desktop/wine32.desktop $HOME/../usr/share/applications
+cp $HOME/Desktop/wine32.desktop $PREFIX/share/applications
 
 echo "[Desktop Entry]
 Version=1.0
@@ -32,6 +32,6 @@ Path=
 Terminal=false
 StartupNotify=true" > $HOME/Desktop/wine64.desktop
 chmod +x $HOME/Desktop/wine64.desktop
-cp $HOME/Desktop/wine64.desktop $HOME/../usr/share/applications
+cp $HOME/Desktop/wine64.desktop $PREFIX/share/applications
 
-rm $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/wine.sh
+rm $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/wine.sh

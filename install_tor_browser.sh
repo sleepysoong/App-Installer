@@ -1,5 +1,5 @@
 #!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 cd
 
@@ -27,4 +27,4 @@ StartupNotify=false
 " > $HOME/Desktop/tor.desktop
 
 chmod +x $HOME/Desktop/tor.desktop
-cp $HOME/Desktop/tor.desktop $HOME/../usr/share/applications/tor.desktop
+cp $HOME/Desktop/tor.desktop $PREFIX/share/applications/tor.desktop

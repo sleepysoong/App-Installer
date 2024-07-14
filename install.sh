@@ -1,46 +1,46 @@
 #!/bin/bash
 
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 # Get the absolute path for the script's directory
 script_dir=$(realpath "$(dirname "$0")")
 
 # Absolute paths for required files and directories
 installed_rootfs_dir="/usr/var/lib/proot-distro/installed-rootfs/ubuntu/home"
-freetube_desktop="$HOME/../usr/share/applications/freetube.desktop"
-tor_desktop="$HOME/../usr/share/applications/tor.desktop"
-webcord_desktop="$HOME/../usr/share/applications/webcord.desktop"
-vivaldi_desktop="$HOME/../usr/share/applications/vivaldi.desktop"
-brave_desktop="$HOME/../usr/share/applications/brave.desktop"
-obsidian_desktop="$HOME/../usr/share/applications/obsidian.desktop"
-libreoffice_desktop="$HOME/../usr/share/applications/libreoffice-base.desktop"
-code_desktop="$HOME/../usr/share/applications/code.desktop"
-vlc_desktop="$HOME/../usr/share/applications/vlc.desktop"
-notion_desktop="$HOME/../usr/share/applications/notion.desktop"
-pycharm_desktop="$HOME/../usr/share/applications/pycharm.desktop"
-remarkable_desktop="$HOME/../usr/share/applications/remarkable.desktop"
-shatteredpd_desktop="$HOME/../usr/share/applications/shatteredpd.desktop"
-el_desktop="$HOME/../usr/share/applications/el.desktop"
-librewolf_desktop="$HOME/../usr/share/applications/librewolf.desktop"
-unciv_desktop="$HOME/../usr/share/applications/unciv.desktop"
-diablo_desktop="$HOME/../usr/share/applications/diablo.desktop"
-element_desktop="$HOME/../usr/share/applications/element.desktop"
-prism_desktop="$HOME/../usr/share/applications/prism.desktop"
-wine_desktop="$HOME/../usr/share/applications/wine32.desktop"
-runelite_desktop="$HOME/../usr/share/applications/runelite.desktop"
-simplenote_desktop="$HOME/../usr/share/applications/SimpleNote.desktop"
-onepassword_desktop="$HOME/../usr/share/applications/1password.desktop"
-lagrange_desktop="$HOME/../usr/share/applications/lagrange.desktop"
-nicotine_desktop="$HOME/../usr/share/applications/nicotine.desktop"
-vieb_desktop="$HOME/../usr/share/applications/vieb.desktop"
-zettlr_desktop="$HOME/../usr/share/applications/Zettlr.desktop"
-armcord_desktop="$HOME/../usr/share/applications/armcord.desktop"
-mari0_desktop="$HOME/../usr/share/applications/mari0.desktop"
-fbird_desktop="$HOME/../usr/share/applications/fbird.desktop"
-gdlauncher_desktop="$HOME/../usr/share/applications/gdlauncher.desktop"
-cockatrice_desktop="$HOME/../usr/share/applications/cockatrice.desktop"
-rustdesk_desktop="$HOME/../usr/share/applications/rustdesk.desktop"
-thorium_desktop="$HOME/../usr/share/applications/thorium-browser.desktop"
+freetube_desktop="$PREFIX/share/applications/freetube.desktop"
+tor_desktop="$PREFIX/share/applications/tor.desktop"
+webcord_desktop="$PREFIX/share/applications/webcord.desktop"
+vivaldi_desktop="$PREFIX/share/applications/vivaldi.desktop"
+brave_desktop="$PREFIX/share/applications/brave.desktop"
+obsidian_desktop="$PREFIX/share/applications/obsidian.desktop"
+libreoffice_desktop="$PREFIX/share/applications/libreoffice-base.desktop"
+code_desktop="$PREFIX/share/applications/code.desktop"
+vlc_desktop="$PREFIX/share/applications/vlc.desktop"
+notion_desktop="$PREFIX/share/applications/notion.desktop"
+pycharm_desktop="$PREFIX/share/applications/pycharm.desktop"
+remarkable_desktop="$PREFIX/share/applications/remarkable.desktop"
+shatteredpd_desktop="$PREFIX/share/applications/shatteredpd.desktop"
+el_desktop="$PREFIX/share/applications/el.desktop"
+librewolf_desktop="$PREFIX/share/applications/librewolf.desktop"
+unciv_desktop="$PREFIX/share/applications/unciv.desktop"
+diablo_desktop="$PREFIX/share/applications/diablo.desktop"
+element_desktop="$PREFIX/share/applications/element.desktop"
+prism_desktop="$PREFIX/share/applications/prism.desktop"
+wine_desktop="$PREFIX/share/applications/wine32.desktop"
+runelite_desktop="$PREFIX/share/applications/runelite.desktop"
+simplenote_desktop="$PREFIX/share/applications/SimpleNote.desktop"
+onepassword_desktop="$PREFIX/share/applications/1password.desktop"
+lagrange_desktop="$PREFIX/share/applications/lagrange.desktop"
+nicotine_desktop="$PREFIX/share/applications/nicotine.desktop"
+vieb_desktop="$PREFIX/share/applications/vieb.desktop"
+zettlr_desktop="$PREFIX/share/applications/Zettlr.desktop"
+armcord_desktop="$PREFIX/share/applications/armcord.desktop"
+mari0_desktop="$PREFIX/share/applications/mari0.desktop"
+fbird_desktop="$PREFIX/share/applications/fbird.desktop"
+gdlauncher_desktop="$PREFIX/share/applications/gdlauncher.desktop"
+cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
+rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
+thorium_desktop="$PREFIX/share/applications/thorium-browser.desktop"
 
 check_freetube_installed() {
     if [ -e "$freetube_desktop" ]; then
@@ -561,7 +561,7 @@ remove_libreoffice() {
     if [ -e "$libreoffice_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove libreoffice -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
-        rm "$HOME/../usr/share/applications/libreoffice*"
+        rm "$PREFIX/share/applications/libreoffice*"
         rm "$libreoffice_desktop"
         zenity --info --title="Removal Complete" --text="Libreoffice has been removed successfully."
     else
@@ -573,7 +573,7 @@ remove_code() {
     if [ -e "$code_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove code -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
-        rm "$HOME/../usr/share/applications/code.desktop"
+        rm "$PREFIX/share/applications/code.desktop"
         rm "$HOME/Desktop/code.desktop"
         rm "$code_desktop"
         zenity --info --title="Removal Complete" --text="VS Code has been removed successfully."
@@ -713,7 +713,7 @@ remove_wine() {
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine64
         rm "$HOME/Desktop/wine32.desktop"
         rm "$HOME/Desktop/wine64.desktop"
-        rm "$HOME/../usr/share/applications/wine32.desktop"
+        rm "$PREFIX/share/applications/wine32.desktop"
         rm "$wine_desktop"
         zenity --info --title="Removal Complete" --text="Box86, Box64 and Wine have been removed successfully."
     else
