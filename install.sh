@@ -3,7 +3,7 @@
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 # Get the absolute path for the script's directory
-script_dir="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/program/App-Installer"
+script_dir=$(realpath "$(dirname "$0")")
 
 # Absolute paths for required files and directories
 installed_rootfs_dir="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home"
