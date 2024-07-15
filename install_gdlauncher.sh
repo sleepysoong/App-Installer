@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 
 #This script installs aarch64 .tar.xz or .tar.gz into ubuntu proot /opt directory and creates a desktop and menu launcher
 

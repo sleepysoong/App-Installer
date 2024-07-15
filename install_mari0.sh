@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 
 #This script installs aarch64 appimages into ubuntu proot /opt directory and creates a desktop and menu launcher
 

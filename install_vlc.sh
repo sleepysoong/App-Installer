@@ -1,5 +1,5 @@
-#!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+##!/data/data/com.termux/files/usr/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt install vlc -y
@@ -19,4 +19,4 @@ StartupNotify=false
 " > $HOME/Desktop/vlc.desktop
 
 chmod +x $HOME/Desktop/vlc.desktop
-cp $HOME/Desktop/vlc.desktop $HOME/../usr/share/applications/vlc.desktop 
+cp $HOME/Desktop/vlc.desktop $PREFIX/share/applications/vlc.desktop 

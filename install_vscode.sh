@@ -1,5 +1,5 @@
-#!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+#!/data/data/com.termux/files/usr/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 wget https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.82.0-1694038208_arm64.deb -O code.deb
@@ -23,4 +23,4 @@ StartupNotify=false
 " > $HOME/Desktop/code.desktop
 
 chmod +x $HOME/Desktop/code.desktop
-cp $HOME/Desktop/code.desktop $HOME/../usr/share/applications/code.desktop 
+cp $HOME/Desktop/code.desktop $PREFIX/share/applications/code.desktop 

@@ -1,5 +1,5 @@
-#!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+#!/data/data/com.termux/files/usr/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 wget https://downloads.vivaldi.com/stable/vivaldi-stable_6.0.2979.22-1_arm64.deb
@@ -20,4 +20,4 @@ MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xht
 " > $HOME/Desktop/vivaldi.desktop
 
 chmod +x $HOME/Desktop/vivaldi.desktop
-cp $HOME/Desktop/vivaldi.desktop $HOME/../usr/share/applications/vivaldi.desktop 
+cp $HOME/Desktop/vivaldi.desktop $PREFIX/share/applications/vivaldi.desktop 

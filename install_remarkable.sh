@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://remarkableapp.github.io/files/remarkable_1.87_all.deb

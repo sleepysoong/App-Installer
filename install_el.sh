@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://www.eternal-lands.com/EternalLands-Linux-Installer_1.9.6.1.sh

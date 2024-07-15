@@ -1,5 +1,5 @@
-#!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+#!/data/data/com.termux/files/usr/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
 proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/SpacingBat3/WebCord/releases/download/v4.8.0/webcord_4.8.0_arm64.deb
@@ -18,4 +18,4 @@ Categories=Network;InstantMessaging;
 " > $HOME/Desktop/webcord.desktop
 
 chmod +x $HOME/Desktop/webcord.desktop
-cp $HOME/Desktop/webcord.desktop $HOME/../usr/share/applications/webcord.desktop 
+cp $HOME/Desktop/webcord.desktop $PREFIX/share/applications/webcord.desktop 

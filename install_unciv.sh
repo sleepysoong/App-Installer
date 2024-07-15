@@ -1,5 +1,5 @@
-#!/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+#!/data/data/com.termux/files/usr/bin/bash
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt install openjdk-17-jre -y
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt -f install
@@ -22,4 +22,4 @@ StartupNotify=true
 " > $HOME/Desktop/unciv.desktop
 
 chmod +x $HOME/Desktop/unciv.desktop
-cp $HOME/Desktop/unciv.desktop $HOME/../usr/share/applications/unciv.desktop
+cp $HOME/Desktop/unciv.desktop $PREFIX/share/applications/unciv.desktop

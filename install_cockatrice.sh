@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/data/data/com.termux/files/usr/bin/bash
 
 #This script installs aarch64 .tar.xz or .tar.gz into ubuntu proot /opt directory and creates a desktop and menu launcher
 
 # Default values to edit
 #Enter URL to appimage
-url="https://github.com/phoenixbyrd/App-Installer/raw/main/cockatrice.deb"
+url="https://github.com/yanghoeg/App-Installer/raw/main/cockatrice.deb"
 #Enter name of app
 appname="cockatrice"
 #Enter path to icon or system icon name
