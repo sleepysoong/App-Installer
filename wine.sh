@@ -29,16 +29,16 @@ mv wine-9.12-x86 wine
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine32
 export DISPLAY=:1
-box86 '"$HOME/wine/bin/wine "'"$@"' > /usr/local/bin/wine
-chmod +x /usr/local/bin/wine
+box86 '"$HOME/wine/bin/wine "'"$@"' > /usr/local/bin/wine32
+chmod +x /usr/local/bin/wine32
 echo '#!/bin/bash 
-export WINEPREFIX=~/.wine64
+export WINEPREFIX=~/.wine
 export DISPLAY=:1
-box64 '"$HOME/wine64/bin/wine64 "'"$@"' > /usr/local/bin/wine64
-chmod +x /usr/local/bin/wine64
+box64 '"$HOME/wine64/bin/wine64 "'"$@"' > /usr/local/bin/wine
+chmod +x /usr/local/bin/wine
 
-WINEPREFIX=~/.wine32 box86 wine winecfg
-WINEPREFIX=~/.wine64 box64 wine64 winecfg
+WINEPREFIX=~/.wine32 box86 wine32 winecfg
+WINEPREFIX=~/.wine box64 wine winecfg
 
 
 
