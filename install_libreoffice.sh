@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
 proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt install libreoffice -y

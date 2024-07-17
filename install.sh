@@ -1,6 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+kaliusername=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/BackTrack/home/*)
 
 # Get the absolute path for the script's directory
 script_dir=$(realpath "$(dirname "$0")")
@@ -41,6 +42,24 @@ gdlauncher_desktop="$PREFIX/share/applications/gdlauncher.desktop"
 cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
 rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
 thorium_desktop="$PREFIX/share/applications/thorium-browser.desktop"
+kali_burpsuite_desktop="$PREFIX/share/applications/kali-burpsuite.desktop"
+miniconda_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/miniconda3"
+
+check_kali_burpsuite_installed() {
+    if [ -e "$burpsuite_desktop" ]; then
+        echo "Installed"
+    else
+        echo "Not Installed"
+    fi
+}
+
+check_miniconda_installed() {
+    if [ -d "$miniconda_desktop" ]; then
+        echo "Installed"
+    else
+        echo "Not Installed"
+    fi
+}
 
 check_freetube_installed() {
     if [ -e "$freetube_desktop" ]; then
@@ -315,6 +334,11 @@ check_thorium_installed() {
     fi
 }
 
+install_kali_burpsuite(){
+    "$script_dir/install_kali_burpsuite"
+    zenity --info --title="Installation Complete" --text="kali_burpsuite has been installed successfully."
+}
+
 install_freetube() {
     "$script_dir/install_freetube.sh"
     zenity --info --title="Installation Complete" --text="FreeTube has been installed successfully."
@@ -352,6 +376,11 @@ install_libreoffice() {
 
 install_code() {
     "$script_dir/install_vscode.sh"
+    zenity --info --title="Installation Complete" --text="Visual Studio has been installed successfully."
+}
+
+install_miniconda() {
+    "$script_dir/install_miniconda.sh"
     zenity --info --title="Installation Complete" --text="Visual Studio has been installed successfully."
 }
 
@@ -487,6 +516,17 @@ install_thorium() {
 }
 
 
+remove_kali_burpsuite() {
+    if [ -e "$kali_burpsuite_desktop" ]; then
+        proot-distro login BackTrack --user $kaliusername --shared-tmp -- env DISPLAY=:1.0 sudo -S apt purge burpsuite
+        rm "$HOME/Desktop/kali-burpsuite.desktop"
+        rm "$kali_burpsuite_desktop"
+        zenity --info --title="Removal Complete" --text="burpsuite has been removed successfully."
+    else
+        zenity --error --title="Removal Error" --text="burpsuite is not installed."
+    fi
+}
+
 remove_freetube() {
     if [ -e "$freetube_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove freetube
@@ -581,6 +621,20 @@ remove_code() {
         zenity --error --title="Removal Error" --text="VS Code is not installed."
     fi
 }
+
+remove_miniconda() {
+
+    if [ -e "$code_desktop" ]; then
+        
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf ~/miniconda3
+        # .bashrc miniconda 삭제 스크립트 작성해야함
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        zenity --info --title="Removal Complete" --text="miniconda3 has been removed successfully."
+    else
+        zenity --error --title="Removal Error" --text="miniconda3 is not installed."
+    fi
+}
+
 
 remove_vlc() {
     if [ -e "$vlc_desktop" ]; then
@@ -851,6 +905,8 @@ remove_thorium() {
 
 while true; do
     # Determine the installation status of each app
+    kali_burpsuite_status=$(check_kali_burpsuite_installed)
+    miniconda_status=$(check_miniconda_installed)
     freetube_status=$(check_freetube_installed)
     tor_browser_status=$(check_tor_browser_installed)
     webcord_status=$(check_webcord_installed)
@@ -887,6 +943,23 @@ while true; do
     thorium_status=$(check_thorium_installed)
 
     # Define the actions based on the installation status
+    if [ "$kali_burpsuite_status" == "Installed" ]; then
+        kali_burpsuite_action="Remove kali_burpsuite (Status: Installed)"
+        kali_burpsuite_description="A web hack application"
+    else
+        kali_burpsuite_action="Install kali_burpsuite (Status: Not Installed)"
+        kali_burpsuite_description="A web hack application"
+    fi
+
+    if [ "$miniconda_status" == "Installed" ]; then
+        miniconda_action="Remove miniconda (Status: Installed)"
+        miniconda_description="miniconda3"
+    else
+        miniconda_action="Install FreeTube (Status: Not Installed)"
+        miniconda_description="miniconda3"
+    fi
+
+
     if [ "$freetube_status" == "Installed" ]; then
         freetube_action="Remove FreeTube (Status: Installed)"
         freetube_description="A privacy-focused YouTube client"
@@ -1168,6 +1241,7 @@ choice=$(zenity --list --radiolist \
     --text="Select an action:" \
     --column="Select" --column="Action" --column="Description" \
     FALSE "$freetube_action" "$freetube_description" \
+    FALSE "$freetube_action" "$freetube_description" \
     FALSE "$tor_browser_action" "$tor_browser_description" \
     FALSE "$webcord_action" "$webcord_description" \
     FALSE "$vivaldi_action" "$vivaldi_description" \
@@ -1211,6 +1285,20 @@ choice=$(zenity --list --radiolist \
 
     # Execute the selected action
     case $choice in
+        "$kali_burpsuite_action")
+            if [ "$kali_burpsuite_status" == "Installed" ]; then
+                remove_kali_burpsuite
+            else
+                install_kali_burpsuite
+            fi
+            ;;
+        "$miniconda_action")
+        if [ "$miniconda_status" == "Installed" ]; then
+            remove_miniconda
+        else
+            install_miniconda
+        fi
+        ;;
         "$freetube_action")
             if [ "$freetube_status" == "Installed" ]; then
                 remove_freetube

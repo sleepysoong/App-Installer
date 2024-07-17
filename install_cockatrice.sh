@@ -38,7 +38,7 @@ if [ "$install" = true ]; then
     download="wget $url"
     install="prun sudo apt install -y "
 
-    varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
+    varname=$(basename $PREFIX/usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
     prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
 
     $prun $download
@@ -46,7 +46,7 @@ if [ "$install" = true ]; then
     $install ./${url##*/}
     $prun rm ${url##*/}
 
-    installed_dir="$HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
+    installed_dir="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/$dir"
     desktop_file="$HOME/Desktop/$appname.desktop"
     binary=$(find "$installed_dir" -type f -executable -print -quit)
 
@@ -70,7 +70,7 @@ Terminal=false
 EOL
 
 chmod +x "$desktop_file"
-cp "$desktop_file" $HOME/../usr/share/applications
+cp "$desktop_file" $PREFIX/usr/share/applications
 echo "Installation completed."
 
 elif [ "$uninstall" = true ]; then
@@ -79,7 +79,7 @@ elif [ "$uninstall" = true ]; then
     $uninstall $appname -y
     desktop_file="$HOME/Desktop/$appname.desktop"
     rm "$desktop_file"
-    rm "$HOME/../usr/share/applications/$appname.desktop"
+    rm "$PREFIX/usr/share/applications/$appname.desktop"
 
     echo "Uninstallation completed."
 else
