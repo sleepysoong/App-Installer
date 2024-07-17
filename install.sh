@@ -1240,7 +1240,8 @@ choice=$(zenity --list --radiolist \
     --title="App Installer" \
     --text="Select an action:" \
     --column="Select" --column="Action" --column="Description" \
-    FALSE "$freetube_action" "$freetube_description" \
+    FALSE "$kali_burpsuite_action" "$kali_burpsuite_description" \
+    FALSE "$miniconda_action" "$miniconda_description" \
     FALSE "$freetube_action" "$freetube_description" \
     FALSE "$tor_browser_action" "$tor_browser_description" \
     FALSE "$webcord_action" "$webcord_description" \
