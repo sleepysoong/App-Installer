@@ -43,7 +43,7 @@ cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
 rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
 thorium_desktop="$PREFIX/share/applications/thorium-browser.desktop"
 kali_burpsuite_desktop="$PREFIX/share/applications/kali-burpsuite.desktop"
-miniconda_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/Miniconda3"
+miniforge_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/miniconda3"
 
 check_kali_burpsuite_installed() {
     if [ -e "$burpsuite_desktop" ]; then
