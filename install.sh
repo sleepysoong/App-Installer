@@ -381,7 +381,7 @@ install_code() {
 
 install_miniconda() {
     "$script_dir/install_miniconda.sh"
-    zenity --info --title="Installation Complete" --text="Visual Studio has been installed successfully."
+    zenity --info --title="Installation Complete" --text="miniconda3 has been installed successfully."
 }
 
 install_vlc() {
