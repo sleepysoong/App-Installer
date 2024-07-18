@@ -955,11 +955,11 @@ while true; do
         miniconda_action="Remove miniconda (Status: Installed)"
         miniconda_description="miniconda3"
     else
-        miniconda_action="Install FreeTube (Status: Not Installed)"
+        miniconda_action="Install miniconda (Status: Installed)"
         miniconda_description="miniconda3"
     fi
 
-    
+
     if [ "$freetube_status" == "Installed" ]; then
         freetube_action="Remove FreeTube (Status: Installed)"
         freetube_description="A privacy-focused YouTube client"
