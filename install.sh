@@ -43,7 +43,7 @@ cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
 rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
 thorium_desktop="$PREFIX/share/applications/thorium-browser.desktop"
 kali_burpsuite_desktop="$PREFIX/share/applications/kali-burpsuite.desktop"
-miniforge_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/miniconda3"
+miniforge_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/miniforge3"
 
 check_kali_burpsuite_installed() {
     if [ -e "$burpsuite_desktop" ]; then
@@ -53,8 +53,8 @@ check_kali_burpsuite_installed() {
     fi
 }
 
-check_miniconda_installed() {
-    if [ -d "$miniconda_desktop" ]; then
+check_miniforge_installed() {
+    if [ -d "$miniforge_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -379,9 +379,9 @@ install_code() {
     zenity --info --title="Installation Complete" --text="Visual Studio has been installed successfully."
 }
 
-install_miniconda() {
-    "$script_dir/install_miniconda.sh"
-    zenity --info --title="Installation Complete" --text="miniconda3 has been installed successfully."
+install_miniforge() {
+    "$script_dir/install_miniforge.sh"
+    zenity --info --title="Installation Complete" --text="miniforge3 has been installed successfully."
 }
 
 install_vlc() {
@@ -622,16 +622,16 @@ remove_code() {
     fi
 }
 
-remove_miniconda() {
+remove_miniforge() {
 
     if [ -e "$code_desktop" ]; then
         
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf ~/miniconda3
-        # .bashrc miniconda 삭제 스크립트 작성해야함
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf ~/miniforge3
+        # .bashrc miniforge 삭제 스크립트 작성해야함
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
-        zenity --info --title="Removal Complete" --text="miniconda3 has been removed successfully."
+        zenity --info --title="Removal Complete" --text="miniforge3 has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="miniconda3 is not installed."
+        zenity --error --title="Removal Error" --text="miniforge3 is not installed."
     fi
 }
 
@@ -906,7 +906,7 @@ remove_thorium() {
 while true; do
     # Determine the installation status of each app
     kali_burpsuite_status=$(check_kali_burpsuite_installed)
-    miniconda_status=$(check_miniconda_installed)
+    miniforge_status=$(check_miniforge_installed)
     freetube_status=$(check_freetube_installed)
     tor_browser_status=$(check_tor_browser_installed)
     webcord_status=$(check_webcord_installed)
@@ -951,12 +951,12 @@ while true; do
         kali_burpsuite_description="A web hack application"
     fi
 
-    if [ "$miniconda_status" == "Installed" ]; then
-        miniconda_action="Remove miniconda (Status: Installed)"
-        miniconda_description="miniconda3"
+    if [ "$miniforge_status" == "Installed" ]; then
+        miniforge_action="Remove miniforge (Status: Installed)"
+        miniforge_description="miniforge3"
     else
-        miniconda_action="Install miniconda (Status: Installed)"
-        miniconda_description="miniconda3"
+        miniforge_action="Install miniforge (Status: Installed)"
+        miniforge_description="miniforge3"
     fi
 
 
@@ -1241,7 +1241,7 @@ choice=$(zenity --list --radiolist \
     --text="Select an action:" \
     --column="Select" --column="Action" --column="Description" \
     FALSE "$kali_burpsuite_action" "$kali_burpsuite_description" \
-    FALSE "$miniconda_action" "$miniconda_description" \
+    FALSE "$miniforge_action" "$miniforge_description" \
     FALSE "$freetube_action" "$freetube_description" \
     FALSE "$tor_browser_action" "$tor_browser_description" \
     FALSE "$webcord_action" "$webcord_description" \
@@ -1293,11 +1293,11 @@ choice=$(zenity --list --radiolist \
                 install_kali_burpsuite
             fi
             ;;
-        "$miniconda_action")
-        if [ "$miniconda_status" == "Installed" ]; then
-            remove_miniconda
+        "$miniforge_action")
+        if [ "$miniforge_status" == "Installed" ]; then
+            remove_miniforge
         else
-            install_miniconda
+            install_miniforge
         fi
         ;;
         "$freetube_action")
