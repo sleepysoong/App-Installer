@@ -6,6 +6,4 @@ proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-aarch64.sh
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 chmod +x Miniforge3-Linux-aarch64.sh
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 bash Miniforge3-Linux-aarch64.sh
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 source .bashrc
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 conda update conda
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm Miniforge3-Linux-aarch64.sh

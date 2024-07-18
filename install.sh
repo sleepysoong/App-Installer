@@ -24,7 +24,6 @@ shatteredpd_desktop="$PREFIX/share/applications/shatteredpd.desktop"
 el_desktop="$PREFIX/share/applications/el.desktop"
 librewolf_desktop="$PREFIX/share/applications/librewolf.desktop"
 unciv_desktop="$PREFIX/share/applications/unciv.desktop"
-diablo_desktop="$PREFIX/share/applications/diablo.desktop"
 element_desktop="$PREFIX/share/applications/element.desktop"
 prism_desktop="$PREFIX/share/applications/prism.desktop"
 wine_desktop="$PREFIX/share/applications/wine32.desktop"
@@ -36,7 +35,6 @@ nicotine_desktop="$PREFIX/share/applications/nicotine.desktop"
 vieb_desktop="$PREFIX/share/applications/vieb.desktop"
 zettlr_desktop="$PREFIX/share/applications/Zettlr.desktop"
 armcord_desktop="$PREFIX/share/applications/armcord.desktop"
-mari0_desktop="$PREFIX/share/applications/mari0.desktop"
 fbird_desktop="$PREFIX/share/applications/fbird.desktop"
 gdlauncher_desktop="$PREFIX/share/applications/gdlauncher.desktop"
 cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
@@ -190,14 +188,6 @@ check_unciv_installed() {
     fi
 }
 
-check_diablo_installed() {
-    if [ -e "$diablo_desktop" ]; then
-        echo "Installed"
-    else
-        echo "Not Installed"
-    fi
-}
-
 check_element_installed() {
     if [ -e "$element_desktop" ]; then
         echo "Installed"
@@ -286,13 +276,6 @@ check_armcord_installed() {
     fi
 }
 
-check_mari0_installed() {
-    if [ -e "$mari0_desktop" ]; then
-        echo "Installed"
-    else
-        echo "Not Installed"
-    fi
-}
 
 check_fbird_installed() {
     if [ -e "$fbird_desktop" ]; then
@@ -424,11 +407,6 @@ install_unciv() {
     zenity --info --title="Installation Complete" --text="Unciv has been installed successfully."
 }
 
-install_diablo() {
-    "$script_dir/install_diablo.sh"
-    zenity --info --title="Installation Complete" --text="DevilutionX has been installed successfully."
-}
-
 install_element() {
     "$script_dir/install_element.sh"
     zenity --info --title="Installation Complete" --text="Element has been installed successfully."
@@ -485,10 +463,6 @@ install_armcord() {
     zenity --info --title="Installation Complete" --text="armcord has been installed successfully."
 }
 
-install_mari0() {
-    "$script_dir/install_mari0.sh" --install
-    zenity --info --title="Installation Complete" --text="mari0 has been installed successfully."
-}
 
 install_fbird() {
     "$script_dir/install_fbird.sh" --install
@@ -725,17 +699,6 @@ remove_unciv() {
     fi
 }
 
-remove_diablo() {
-    if [ -e "$diablo_desktop" ]; then
-        rm -rf ../usr/var/lib/proot-distro/installed-rootfs/ubuntu/opt/devilutionx
-        rm "$HOME/Desktop/diablo.desktop"
-        rm "$diablo_desktop"
-        zenity --info --title="Removal Complete" --text="DevilutionX has been removed successfully."
-    else
-        zenity --error --title="Removal Error" --text="DevilutionX is not installed."
-    fi
-}
-
 remove_element() {
     if [ -e "$element_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove element-desktop -y
@@ -849,14 +812,6 @@ remove_armcord() {
     fi
 }
 
-remove_mari0() {
-    if [ -e "$mari0_desktop" ]; then
-        "$script_dir/install_mari0.sh" --uninstall
-        zenity --info --title="Removal Complete" --text="mari0 has been removed successfully."
-    else
-        zenity --error --title="Removal Error" --text="mari0 is not installed."
-    fi
-}
 
 remove_fbird() {
     if [ -e "$fbird_desktop" ]; then
@@ -923,7 +878,6 @@ while true; do
     el_status=$(check_el_installed)
     librewolf_status=$(check_librewolf_installed)
     unciv_status=$(check_unciv_installed)
-    diablo_status=$(check_diablo_installed)
     element_status=$(check_element_installed)
     prism_status=$(check_prism_installed)
     wine_status=$(check_wine_installed)
@@ -935,7 +889,6 @@ while true; do
     vieb_status=$(check_vieb_installed)
     zettlr_status=$(check_zettlr_installed)
     armcord_status=$(check_armcord_installed)
-    mari0_status=$(check_mari0_installed)
     fbird_status=$(check_fbird_installed)
     gdlauncher_status=$(check_gdlauncher_installed)
     cockatrice_status=$(check_cockatrice_installed)
@@ -1088,14 +1041,6 @@ while true; do
         unciv_description="Open-source remake of Civ V"
     fi
 
-    if [ "$diablo_status" == "Installed" ]; then
-        diablo_action="Remove DevilutionX (Status: Installed)"
-        diablo_description="Diablo build for modern operating systems"
-    else
-        diablo_action="Install DevilutionX (Status: Not Installed)"
-        diablo_description="Diablo build for modern operating systems"
-    fi
-
     if [ "$element_status" == "Installed" ]; then
         element_action="Remove Element (Status: Installed)"
         element_description="A secure communications platform "
@@ -1184,14 +1129,6 @@ while true; do
         armcord_description="A custom themable Discord client"
     fi
 
-    if [ "$mari0_status" == "Installed" ]; then
-        mari0_action="Remove mari0 (Status: Installed)"
-        mari0_description="Mario with a portal gun"
-    else
-        mari0_action="Install mari0 (Status: Not Installed)"
-        mari0_description="Mario with a portal gun"
-    fi
-
     if [ "$fbird_status" == "Installed" ]; then
         fbird_action="Remove Flappy Bird (Status: Installed)"
         fbird_description="QB64 Clone of Flappy Bird"
@@ -1258,7 +1195,6 @@ choice=$(zenity --list --radiolist \
     FALSE "$el_action" "$el_description" \
     FALSE "$librewolf_action" "$librewolf_description" \
     FALSE "$unciv_action" "$unciv_description" \
-    FALSE "$diablo_action" "$diablo_description" \
     FALSE "$element_action" "$element_description" \
     FALSE "$prism_action" "$prism_description" \
     FALSE "$runelite_action" "$runelite_description" \
@@ -1270,7 +1206,6 @@ choice=$(zenity --list --radiolist \
     FALSE "$zettlr_action" "$zettlr_description" \
     FALSE "$armcord_action" "$armcord_description" \
     FALSE "$wine_action" "$wine_description" \
-    FALSE "$mari0_action" "$mari0_description" \
     FALSE "$fbird_action" "$fbird_description" \
     FALSE "$gdlauncher_action" "$gdlauncher_description" \
     FALSE "$cockatrice_action" "$cockatrice_description" \
@@ -1412,13 +1347,6 @@ choice=$(zenity --list --radiolist \
                 install_unciv
             fi
             ;; 
-        "$diablo_action")
-            if [ "$diablo_status" == "Installed" ]; then
-                remove_diablo
-            else
-                install_diablo
-            fi
-            ;;   
         "$element_action")
             if [ "$element_status" == "Installed" ]; then
                 remove_element
@@ -1494,13 +1422,6 @@ choice=$(zenity --list --radiolist \
                 remove_armcord
             else
                 install_armcord
-            fi
-            ;;
-        "$mari0_action")
-            if [ "$mari0_status" == "Installed" ]; then
-                remove_mari0
-            else
-                install_mari0
             fi
             ;;
         "$fbird_action")
