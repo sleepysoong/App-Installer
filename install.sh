@@ -8,7 +8,7 @@ script_dir=$(realpath "$(dirname "$0")")
 
 # Absolute paths for required files and directories
 installed_rootfs_dir="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home"
-freetube_desktop="$PREFIX/share/applications/freetube.desktop"
+owncloud_desktop="$PREFIX/share/applications/owncloud.desktop"
 tor_desktop="$PREFIX/share/applications/tor.desktop"
 webcord_desktop="$PREFIX/share/applications/webcord.desktop"
 vivaldi_desktop="$PREFIX/share/applications/vivaldi.desktop"
@@ -59,8 +59,8 @@ check_miniforge_installed() {
     fi
 }
 
-check_freetube_installed() {
-    if [ -e "$freetube_desktop" ]; then
+check_owncloud_installed() {
+    if [ -e "$owncloud_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -322,9 +322,9 @@ install_kali_burpsuite(){
     zenity --info --title="Installation Complete" --text="kali_burpsuite has been installed successfully."
 }
 
-install_freetube() {
-    "$script_dir/install_freetube.sh"
-    zenity --info --title="Installation Complete" --text="FreeTube has been installed successfully."
+install_owncloud() {
+    "$script_dir/install_owncloud.sh"
+    zenity --info --title="Installation Complete" --text="owncloud has been installed successfully."
 }
 
 install_tor_browser() {
@@ -501,14 +501,14 @@ remove_kali_burpsuite() {
     fi
 }
 
-remove_freetube() {
-    if [ -e "$freetube_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove freetube
-        rm "$HOME/Desktop/freetube.desktop"
-        rm "$freetube_desktop"
-        zenity --info --title="Removal Complete" --text="FreeTube has been removed successfully."
+remove_owncloud() {
+    if [ -e "$owncloud_desktop" ]; then
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove owncloud
+        rm "$HOME/Desktop/owncloud.desktop"
+        rm "$owncloud_desktop"
+        zenity --info --title="Removal Complete" --text="owncloud has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="FreeTube is not installed."
+        zenity --error --title="Removal Error" --text="owncloud is not installed."
     fi
 }
 
@@ -862,7 +862,7 @@ while true; do
     # Determine the installation status of each app
     kali_burpsuite_status=$(check_kali_burpsuite_installed)
     miniforge_status=$(check_miniforge_installed)
-    freetube_status=$(check_freetube_installed)
+    owncloud_status=$(check_owncloud_installed)
     tor_browser_status=$(check_tor_browser_installed)
     webcord_status=$(check_webcord_installed)
     vivaldi_status=$(check_vivaldi_installed)
@@ -913,12 +913,12 @@ while true; do
     fi
 
 
-    if [ "$freetube_status" == "Installed" ]; then
-        freetube_action="Remove FreeTube (Status: Installed)"
-        freetube_description="A privacy-focused YouTube client"
+    if [ "$owncloud_status" == "Installed" ]; then
+        owncloud_action="Remove owncloud (Status: Installed)"
+        owncloud_description="A privacy-focused YouTube client"
     else
-        freetube_action="Install FreeTube (Status: Not Installed)"
-        freetube_description="A privacy-focused YouTube client"
+        owncloud_action="Install owncloud (Status: Not Installed)"
+        owncloud_description="A privacy-focused YouTube client"
     fi
 
     if [ "$tor_browser_status" == "Installed" ]; then
@@ -1179,7 +1179,7 @@ choice=$(zenity --list --radiolist \
     --column="Select" --column="Action" --column="Description" \
     FALSE "$kali_burpsuite_action" "$kali_burpsuite_description" \
     FALSE "$miniforge_action" "$miniforge_description" \
-    FALSE "$freetube_action" "$freetube_description" \
+    FALSE "$owncloud_action" "$owncloud_description" \
     FALSE "$tor_browser_action" "$tor_browser_description" \
     FALSE "$webcord_action" "$webcord_description" \
     FALSE "$vivaldi_action" "$vivaldi_description" \
@@ -1235,11 +1235,11 @@ choice=$(zenity --list --radiolist \
             install_miniforge
         fi
         ;;
-        "$freetube_action")
-            if [ "$freetube_status" == "Installed" ]; then
-                remove_freetube
+        "$owncloud_action")
+            if [ "$owncloud_status" == "Installed" ]; then
+                remove_owncloud
             else
-                install_freetube
+                install_owncloud
             fi
             ;;
         "$tor_browser_action")
