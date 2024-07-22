@@ -466,7 +466,7 @@ install_armcord() {
 
 install_dbeaver() {
     "$script_dir/install_dbeaver.sh" --install
-    zenity --info --title="Installation Complete" --text="Flappy Bird has been installed successfully."
+    zenity --info --title="Installation Complete" --text="dbeaver been installed successfully."
 }
 
 install_gdlauncher() {
@@ -646,7 +646,8 @@ remove_pycharm() {
 
 remove_thunderbird() {
     if [ -e "$thunderbird_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove thunderbird -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -f /usr/bin/thunderbird
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf /opt/thunderbird
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/thunderbird.desktop"
         rm "$thunderbird_desktop"
@@ -816,10 +817,14 @@ remove_armcord() {
 
 remove_dbeaver() {
     if [ -e "$dbeaver_desktop" ]; then
-        "$script_dir/install_dbeaver.sh" --uninstall
-        zenity --info --title="Removal Complete" --text="Flappy Bird has been removed successfully."
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -f /usr/bin/dbeaver
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf /opt/dbeaver
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
+        rm "$HOME/Desktop/dbeaver.desktop"
+        rm "$dbeaver_desktop"
+        zenity --info --title="Removal Complete" --text="dbeaver has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="Flappy Bird is not installed."
+        zenity --error --title="Removal Error" --text="dbeaver is not installed."
     fi
 }
 
@@ -1131,11 +1136,11 @@ while true; do
     fi
 
     if [ "$dbeaver_status" == "Installed" ]; then
-        dbeaver_action="Remove Flappy Bird (Status: Installed)"
-        dbeaver_description="QB64 Clone of Flappy Bird"
+        dbeaver_action="Remove Dbeaver (Status: Installed)"
+        dbeaver_description="Dbeaver-SQL App"
     else
-        dbeaver_action="Install Flappy Bird (Status: Not Installed)"
-        dbeaver_description="QB64 Clone of Flappy Bird"
+        dbeaver_action="Install Dbeaver (Status: Not Installed)"
+        dbeaver_description="Dbeaver-SQL App"
     fi
 
     if [ "$gdlauncher_status" == "Installed" ]; then
