@@ -4,10 +4,10 @@ varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 #Install Obsidian
 
-proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install software-properties-common -y
-proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt add-apt-repository ppa:nextcloud-devs/client
-proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt update -y
-proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install install owncloud-client -y
+proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt install software-properties-common -y
+proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt add-apt-repository ppa:nextcloud-devs/client
+proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt update -y
+proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt install install owncloud-client -y
 
 #Create Desktop Launcher
 
