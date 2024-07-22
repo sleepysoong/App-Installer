@@ -29,7 +29,7 @@ if [ "$install" = true ]; then
     cp $PREFIX/var/lib/proot-distro/installed-rootfs/BackTrack/usr/share/applications/kali-$appname.desktop $PREFIX/share/applications
     sed -i "s/^Exec=\(.*\)$/Exec=proot-distro login BackTrack --user $varname --shared-tmp -- env DISPLAY=:1.0 \1/"  $PREFIX/share/applications/kali-$appname.desktop
 
-    category="Application"
+    Categories=Development;
     desktop_file="$HOME/Desktop/kali-$appname.desktop"
 
     #NOTE: Do not remove prun from Exec command

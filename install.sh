@@ -19,7 +19,7 @@ code_desktop="$PREFIX/share/applications/code.desktop"
 vlc_desktop="$PREFIX/share/applications/vlc.desktop"
 notion_desktop="$PREFIX/share/applications/notion.desktop"
 pycharm_desktop="$PREFIX/share/applications/pycharm.desktop"
-remarkable_desktop="$PREFIX/share/applications/remarkable.desktop"
+thunderbird_desktop="$PREFIX/share/applications/thunderbird.desktop"
 shatteredpd_desktop="$PREFIX/share/applications/shatteredpd.desktop"
 el_desktop="$PREFIX/share/applications/el.desktop"
 librewolf_desktop="$PREFIX/share/applications/librewolf.desktop"
@@ -35,7 +35,7 @@ nicotine_desktop="$PREFIX/share/applications/nicotine.desktop"
 vieb_desktop="$PREFIX/share/applications/vieb.desktop"
 zettlr_desktop="$PREFIX/share/applications/Zettlr.desktop"
 armcord_desktop="$PREFIX/share/applications/armcord.desktop"
-fbird_desktop="$PREFIX/share/applications/fbird.desktop"
+dbeaver_desktop="$PREFIX/share/applications/dbeaver.desktop"
 gdlauncher_desktop="$PREFIX/share/applications/gdlauncher.desktop"
 cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
 rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
@@ -147,8 +147,8 @@ check_pycharm_installed() {
     fi
 }
 
-check_remarkable_installed() {
-    if [ -e "$remarkable_desktop" ]; then
+check_thunderbird_installed() {
+    if [ -e "$thunderbird_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -277,8 +277,8 @@ check_armcord_installed() {
 }
 
 
-check_fbird_installed() {
-    if [ -e "$fbird_desktop" ]; then
+check_dbeaver_installed() {
+    if [ -e "$dbeaver_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -382,9 +382,9 @@ install_pycharm() {
     zenity --info --title="Installation Complete" --text="PyCharm has been installed successfully."
 }
 
-install_remarkable() {
-    "$script_dir/install_remarkable.sh"
-    zenity --info --title="Installation Complete" --text="Remarkable has been installed successfully."
+install_thunderbird() {
+    "$script_dir/install_thunderbird.sh"
+    zenity --info --title="Installation Complete" --text="thunderbird has been installed successfully."
 }
 
 install_shatteredpd() {
@@ -464,8 +464,8 @@ install_armcord() {
 }
 
 
-install_fbird() {
-    "$script_dir/install_fbird.sh" --install
+install_dbeaver() {
+    "$script_dir/install_dbeaver.sh" --install
     zenity --info --title="Installation Complete" --text="Flappy Bird has been installed successfully."
 }
 
@@ -644,15 +644,15 @@ remove_pycharm() {
     fi
 }
 
-remove_remarkable() {
-    if [ -e "$remarkable_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove remarkable -y
+remove_thunderbird() {
+    if [ -e "$thunderbird_desktop" ]; then
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove thunderbird -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
-        rm "$HOME/Desktop/remarkable.desktop"
-        rm "$remarkable_desktop"
-        zenity --info --title="Removal Complete" --text="Remarkable has been removed successfully."
+        rm "$HOME/Desktop/thunderbird.desktop"
+        rm "$thunderbird_desktop"
+        zenity --info --title="Removal Complete" --text="thunderbird has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="Remarkable is not installed."
+        zenity --error --title="Removal Error" --text="thunderbird is not installed."
     fi
 }
 
@@ -814,9 +814,9 @@ remove_armcord() {
 }
 
 
-remove_fbird() {
-    if [ -e "$fbird_desktop" ]; then
-        "$script_dir/install_fbird.sh" --uninstall
+remove_dbeaver() {
+    if [ -e "$dbeaver_desktop" ]; then
+        "$script_dir/install_dbeaver.sh" --uninstall
         zenity --info --title="Removal Complete" --text="Flappy Bird has been removed successfully."
     else
         zenity --error --title="Removal Error" --text="Flappy Bird is not installed."
@@ -874,7 +874,7 @@ while true; do
     vlc_status=$(check_vlc_installed)
     notion_status=$(check_notion_installed)
     pycharm_status=$(check_pycharm_installed)
-    remarkable_status=$(check_remarkable_installed)
+    thunderbird_status=$(check_thunderbird_installed)
     shatteredpd_status=$(check_shatteredpd_installed)
     el_status=$(check_el_installed)
     librewolf_status=$(check_librewolf_installed)
@@ -890,7 +890,7 @@ while true; do
     vieb_status=$(check_vieb_installed)
     zettlr_status=$(check_zettlr_installed)
     armcord_status=$(check_armcord_installed)
-    fbird_status=$(check_fbird_installed)
+    dbeaver_status=$(check_dbeaver_installed)
     gdlauncher_status=$(check_gdlauncher_installed)
     cockatrice_status=$(check_cockatrice_installed)
     rustdesk_status=$(check_rustdesk_installed)
@@ -1002,12 +1002,12 @@ while true; do
         pycharm_description="A Python IDE"
     fi
     
-    if [ "$remarkable_status" == "Installed" ]; then
-        remarkable_action="Remove Remarkable (Status: Installed)"
-        remarkable_description="A Markdown Editor"
+    if [ "$thunderbird_status" == "Installed" ]; then
+        thunderbird_action="Remove thunderbird (Status: Installed)"
+        thunderbird_description="A Markdown Editor"
     else
-        remarkable_action="Install Remarkable (Status: Not Installed)"
-        remarkable_description="A Markdown Editor"
+        thunderbird_action="Install thunderbird (Status: Not Installed)"
+        thunderbird_description="A Markdown Editor"
     fi
 
     if [ "$shatteredpd_status" == "Installed" ]; then
@@ -1130,12 +1130,12 @@ while true; do
         armcord_description="A custom themable Discord client"
     fi
 
-    if [ "$fbird_status" == "Installed" ]; then
-        fbird_action="Remove Flappy Bird (Status: Installed)"
-        fbird_description="QB64 Clone of Flappy Bird"
+    if [ "$dbeaver_status" == "Installed" ]; then
+        dbeaver_action="Remove Flappy Bird (Status: Installed)"
+        dbeaver_description="QB64 Clone of Flappy Bird"
     else
-        fbird_action="Install Flappy Bird (Status: Not Installed)"
-        fbird_description="QB64 Clone of Flappy Bird"
+        dbeaver_action="Install Flappy Bird (Status: Not Installed)"
+        dbeaver_description="QB64 Clone of Flappy Bird"
     fi
 
     if [ "$gdlauncher_status" == "Installed" ]; then
@@ -1191,7 +1191,7 @@ choice=$(zenity --list --radiolist \
     FALSE "$vlc_action" "$vlc_description" \
     FALSE "$notion_action" "$notion_description" \
     FALSE "$pycharm_action" "$pycharm_description" \
-    FALSE "$remarkable_action" "$remarkable_description" \
+    FALSE "$thunderbird_action" "$thunderbird_description" \
     FALSE "$shatteredpd_action" "$shatteredpd_description" \
     FALSE "$el_action" "$el_description" \
     FALSE "$librewolf_action" "$librewolf_description" \
@@ -1207,7 +1207,7 @@ choice=$(zenity --list --radiolist \
     FALSE "$zettlr_action" "$zettlr_description" \
     FALSE "$armcord_action" "$armcord_description" \
     FALSE "$wine_action" "$wine_description" \
-    FALSE "$fbird_action" "$fbird_description" \
+    FALSE "$dbeaver_action" "$dbeaver_description" \
     FALSE "$gdlauncher_action" "$gdlauncher_description" \
     FALSE "$cockatrice_action" "$cockatrice_description" \
     FALSE "$rustdesk_action" "$rustdesk_description" \
@@ -1313,11 +1313,11 @@ choice=$(zenity --list --radiolist \
                 install_pycharm
             fi
             ;;   
-        "$remarkable_action")
-            if [ "$remarkable_status" == "Installed" ]; then
-                remove_remarkable
+        "$thunderbird_action")
+            if [ "$thunderbird_status" == "Installed" ]; then
+                remove_thunderbird
             else
-                install_remarkable
+                install_thunderbird
             fi
             ;;   
         "$shatteredpd_action")
@@ -1425,11 +1425,11 @@ choice=$(zenity --list --radiolist \
                 install_armcord
             fi
             ;;
-        "$fbird_action")
-            if [ "$fbird_status" == "Installed" ]; then
-                remove_fbird
+        "$dbeaver_action")
+            if [ "$dbeaver_status" == "Installed" ]; then
+                remove_dbeaver
             else
-                install_fbird
+                install_dbeaver
             fi
             ;;
         "$gdlauncher_action")
