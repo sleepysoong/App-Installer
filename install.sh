@@ -1009,10 +1009,10 @@ while true; do
     
     if [ "$thunderbird_status" == "Installed" ]; then
         thunderbird_action="Remove thunderbird (Status: Installed)"
-        thunderbird_description="A Markdown Editor"
+        thunderbird_description="A mail client"
     else
         thunderbird_action="Install thunderbird (Status: Not Installed)"
-        thunderbird_description="A Markdown Editor"
+        thunderbird_description="A mail client"
     fi
 
     if [ "$shatteredpd_status" == "Installed" ]; then

@@ -2,12 +2,12 @@
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 apt update
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/dbeaver/dbeaver/releases/download/24.1.3/dbeaver-ce-24.1.3-linux.gtk.aarch64-nojdk.tar.gz -O thunderbird.tar.gz
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 tar -xvzf thunderbird.tar.gz
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://download.mozilla.org/?product=thunderbird-latest&os=linux&lang=ko -O thunderbird.tar.bz2
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 tar -xvzf xjf thunderbird.tar.bz2
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 mv thunderbird /opt/
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo ln -s /opt/thunderbird/thunderbird /usr/bin/thunderbird
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install apt-utils openjdk-11-jdk -y
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -f thunderbird.tar.gz
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -f thunderbird.tar.bz2
 
 echo "[Desktop Entry]
 Version=1.0

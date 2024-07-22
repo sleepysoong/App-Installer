@@ -2,7 +2,7 @@
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 apt update
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://dbeaver.io/files/dbeaver-ce-latest-linux.gtk.aarch64-nojdk.tar.gz -O dbeaver.tar.gz
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/dbeaver/dbeaver/releases/download/24.1.3/dbeaver-ce-24.1.3-linux.gtk.aarch64-nojdk.tar.gz -O dbeaver.tar.gz
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 tar -xvzf ./dbeaver.tar.gz
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 mv dbeaver /opt/
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo ln -s /opt/dbeaver/dbeaver /usr/bin/dbeaver
