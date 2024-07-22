@@ -505,6 +505,7 @@ remove_owncloud() {
     if [ -e "$owncloud_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt remove owncloud
         rm "$HOME/Desktop/owncloud.desktop"
+        rm "$PREFIX/share/applications/owncloud.desktop"
         rm "$owncloud_desktop"
         zenity --info --title="Removal Complete" --text="owncloud has been removed successfully."
     else
