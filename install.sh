@@ -646,13 +646,16 @@ remove_pycharm() {
 
 remove_thunderbird() {
     if [ -e "$thunderbird_desktop" ]; then
-        pkg uninstall thunderbird -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -f /usr/bin/thunderbird
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf /opt/thunderbird
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/thunderbird.desktop"
         rm "$thunderbird_desktop"
         zenity --info --title="Removal Complete" --text="thunderbird has been removed successfully."
     else
         zenity --error --title="Removal Error" --text="thunderbird is not installed."
     fi
+    
 }
 
 remove_shatteredpd() {
