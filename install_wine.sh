@@ -5,7 +5,6 @@ varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 cp $HOME/.App-Installer/wine.sh $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 ./wine.sh
 
-
 #echo "[Desktop Entry]
 #Version=1.0
 #Type=Application

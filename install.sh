@@ -646,8 +646,7 @@ remove_pycharm() {
 
 remove_thunderbird() {
     if [ -e "$thunderbird_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -f /usr/bin/thunderbird
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo rm -rf /opt/thunderbird
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge thunderbird
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/thunderbird.desktop"
         rm "$thunderbird_desktop"

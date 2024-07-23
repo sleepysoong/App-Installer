@@ -2,10 +2,9 @@
 
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 <<'EOF'
+proot-distro login ubuntu --user $varname --shared-tmp --env DISPLAY=:1.0 <<'EOF'
 line='deb [signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports mantic main universe multiverse'
 file="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list"
-
 if ! grep -Fxq "$line" "$file"; then
   echo "$line" >> "$file"
 fi
