@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo apt update -y
 sudo apt install gpg -y 
 
@@ -23,23 +24,59 @@ wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.12/wine-9.12-x86
 tar xvf wine-9.12-amd64.tar.xz
 tar xvf wine-9.12-x86.tar.xz
 rm wine-9.12-amd64.tar.xz wine-9.12-x86.tar.xz
-mv wine-9.12-amd64 wine64
-mv wine-9.12-x86 wine
+mv wine-9.12-amd64 wine
+mv wine-9.12-x86 wine32
 
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine32
 export DISPLAY=:1
-box86 '"$HOME/wine/bin/wine "'"$@"' > /usr/local/bin/wine32
+box86 '"$HOME/wine32/bin/wine "'"$@"' > /usr/local/bin/wine32
 chmod +x /usr/local/bin/wine32
 
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine
 export DISPLAY=:1
-box64 '"$HOME/wine64/bin/wine64 "'"$@"' > /usr/local/bin/wine
+box64 '"$HOME/wine/bin/wine64 "'"$@"' > /usr/local/bin/wine
 chmod +x /usr/local/bin/wine
+
+echo '
+export BOX86_PATH=~/wine32/bin/
+export BOX86_LD_LIBRARY_PATH=~/wine32/lib/wine/i386-unix/:/lib/i386-linux-gnu/:/lib/aarch64-linux-gnu/:/lib/arm-linux-gnueabihf/:/usr/lib/aarch64-linux-gnu/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/i386-linux-gnu/
+export BOX64_PATH=~/wine/bin/
+export BOX64_LD_LIBRARY_PATH=~/wine/lib/i386-unix/:~/wine/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/:/lib/arm-linux-gnueabihf/:/usr/lib/aarch64-linux-gnu/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/i386-linux-gnu/:/usr/lib/x86_64-linux-gnu' >> ~/.bashrc
+
+source ~/.bashrc
+
 
 WINEPREFIX=~/.wine32 box86 wine32 winecfg
 WINEPREFIX=~/.wine box64 wine winecfg
 
+wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 
+chmod +x winetricks
 
+mv winetricks /usr/local/bin/
+
+echo '#!/bin/bash
+export BOX86_NOBANNER=1 WINE=wine WINEPREFIX=~/.wine32 WINESERVER=~/wine32/bin/wineserver
+wine '"/usr/local/bin/winetricks "'"$@"' > /usr/local/bin/winetricks32
+
+chmod +x /usr/local/bin/winetricks32
+
+echo '#!/bin/bash
+export BOX64_NOBANNER=1 WINE=wine64 WINEPREFIX=~/.wine WINESERVER=~/wine/bin/wineserver
+wine64 '"/usr/local/bin/winetricks "'"$@"' > /usr/local/bin/winetricks64
+
+chmod +x /usr/local/bin/winetricks64
+
+sudo apt install mesa-vulkan-drivers mesa-vulkan-drivers:armhf libvulkan1 libvulkan1:armhf
+
+tar xvf dxvk-2.3.1.tar.gz
+
+cd 
+cp ~/dxvk-2.3.1/x32/* ~/.wine32/drive_c/windows/system32
+cp ~/dxvk-2.3.1/x32/* ~/.wine/drive_c/windows/system32
+cp ~/dxvk-2.3.1/x64/* ~/.wine/drive_c/windows/syswow64
+
+wine32 winecfg
+wine winecfg
