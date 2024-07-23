@@ -646,10 +646,14 @@ remove_pycharm() {
 
 remove_thunderbird() {
     if [ -e "$thunderbird_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge thunderbird
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge thunderbird -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
         rm "$HOME/Desktop/thunderbird.desktop"
         rm "$thunderbird_desktop"
+        SOURCE_LINE='deb [signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports mantic main universe multiverse'
+        SOURCE_FILE="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list"
+
+        sed -i "\|$SOURCE_LINE|d" "$SOURCE_FILE"
         zenity --info --title="Removal Complete" --text="thunderbird has been removed successfully."
     else
         zenity --error --title="Removal Error" --text="thunderbird is not installed."
