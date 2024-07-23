@@ -734,9 +734,9 @@ remove_wine() {
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine32 wine .wine32 .wine
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine32
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetrick
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetrick32
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetrick64
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks32
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks64
         #rm "$HOME/Desktop/wine32.desktop"
         rm "$HOME/Desktop/wine.desktop"
         rm "$PREFIX/share/applications/wine.desktop"
