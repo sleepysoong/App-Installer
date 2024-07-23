@@ -2,24 +2,20 @@
 
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 apt update
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/128.0.1esr/linux-x86_64/ko/thunderbird-128.0.1esr.tar.bz2 -O thunderbird.tar.bz2
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 tar xjf ./thunderbird.tar.bz2
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 mv thunderbird /opt/
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo ln -s /opt/thunderbird/thunderbird /usr/bin/thunderbird
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install apt-utils openjdk-11-jdk -y
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -f thunderbird.tar.bz2
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 <<'EOF'
+line='deb [signed-by="/usr/share/keyrings/ubuntu-archive-keyring.gpg"] http://ports.ubuntu.com/ubuntu-ports mantic main universe multiverse'
+file="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list"
 
-echo "[Desktop Entry]
-Version=1.0
-Name=thunderbird
-Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 thunderbird --no-sandbox
-StartupNotify=true
-Terminal=false
-Icon=thunderbird
-Type=Application
-Categories=Development;
-" > $HOME/Desktop/thunderbird.desktop
+if ! grep -Fxq "$line" "$file"; then
+  echo "$line" >> "$file"
+fi
+EOF
 
-chmod +x $HOME/Desktop/thunderbird.desktop
-cp $HOME/Desktop/thunderbird.desktop $PREFIX/share/applications/thunderbird.desktop
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt update
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt install thunderbird
+
+cp $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/usr/share/applications/thunderbird.desktop $PREFIX/share/applications
+sed -i "s/^Exec=\(.*\)$/Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 \1/"   $PREFIX/share/applications/thunderbird.desktop
+
+chmod +x $PREFIX/share/applications/thunderbird.desktop 
+cp $PREFIX/share/applications/thunderbird.desktop $HOME/Desktop/thunderbird.desktop

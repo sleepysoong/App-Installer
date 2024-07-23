@@ -31,6 +31,7 @@ export WINEPREFIX=~/.wine32
 export DISPLAY=:1
 box86 '"$HOME/wine/bin/wine "'"$@"' > /usr/local/bin/wine32
 chmod +x /usr/local/bin/wine32
+
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine
 export DISPLAY=:1
