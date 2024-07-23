@@ -65,11 +65,11 @@ chmod +x /usr/local/bin/winetricks32
 
 echo '#!/bin/bash
 export BOX64_NOBANNER=1 WINE=wine64 WINEPREFIX=~/.wine WINESERVER=~/wine/bin/wineserver
-wine64 '"/usr/local/bin/winetricks "'"$@"' > /usr/local/bin/winetricks64
+wine '"/usr/local/bin/winetricks "'"$@"' > /usr/local/bin/winetricks64
 
 chmod +x /usr/local/bin/winetricks64
 
-sudo apt install mesa-vulkan-drivers mesa-vulkan-drivers:armhf libvulkan1 libvulkan1:armhf
+sudo apt install mesa-vulkan-drivers mesa-vulkan-drivers:armhf libvulkan1 libvulkan1:armhf -y
 
 tar xvf dxvk-2.3.1.tar.gz
 
