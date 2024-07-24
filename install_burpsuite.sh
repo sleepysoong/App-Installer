@@ -12,9 +12,9 @@ proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm ./
 echo "[Desktop Entry]
 Version=1.0
 Name=$appname
-Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 /home/$varname/BurpSuiteCommunity/BurpSuiteCommunity
+Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 /opt/BurpSuiteCommunity/BurpSuiteCommunity
 StartupNotify=true
-Terminal=false
+Terminal=true
 Icon=$appname
 Type=Application
 Categories=Development;
