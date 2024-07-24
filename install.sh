@@ -40,10 +40,10 @@ gdlauncher_desktop="$PREFIX/share/applications/gdlauncher.desktop"
 cockatrice_desktop="$PREFIX/share/applications/cockatrice.desktop"
 rustdesk_desktop="$PREFIX/share/applications/rustdesk.desktop"
 thorium_desktop="$PREFIX/share/applications/thorium-browser.desktop"
-kali_burpsuite_desktop="$PREFIX/share/applications/kali-burpsuite.desktop"
+burpsuite_desktop="$PREFIX/share/applications/burpsuite.desktop"
 miniforge_desktop="$PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/miniforge3"
 
-check_kali_burpsuite_installed() {
+check_burpsuite_installed() {
     if [ -e "$burpsuite_desktop" ]; then
         echo "Installed"
     else
@@ -317,9 +317,9 @@ check_thorium_installed() {
     fi
 }
 
-install_kali_burpsuite(){
-    "$script_dir/install_kali_burpsuite"
-    zenity --info --title="Installation Complete" --text="kali_burpsuite has been installed successfully."
+install_burpsuite(){
+    "$script_dir/install_burpsuite"
+    zenity --info --title="Installation Complete" --text="burpsuite has been installed successfully."
 }
 
 install_owncloud() {
@@ -490,11 +490,11 @@ install_thorium() {
 }
 
 
-remove_kali_burpsuite() {
-    if [ -e "$kali_burpsuite_desktop" ]; then
-        proot-distro login BackTrack --user $kaliusername --shared-tmp -- env DISPLAY=:1.0 sudo -S apt purge burpsuite
-        rm "$HOME/Desktop/kali-burpsuite.desktop"
-        rm "$kali_burpsuite_desktop"
+remove_burpsuite() {
+    if [ -e "$burpsuite_desktop" ]; then
+        proot-distro login BackTrack --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo /home/$varname/BurpSuiteCommunity/uninstall
+        rm "$HOME/Desktop/burpsuite.desktop"
+        rm "$burpsuite_desktop"
         zenity --info --title="Removal Complete" --text="burpsuite has been removed successfully."
     else
         zenity --error --title="Removal Error" --text="burpsuite is not installed."
@@ -873,7 +873,7 @@ remove_thorium() {
 
 while true; do
     # Determine the installation status of each app
-    kali_burpsuite_status=$(check_kali_burpsuite_installed)
+    burpsuite_status=$(check_burpsuite_installed)
     miniforge_status=$(check_miniforge_installed)
     owncloud_status=$(check_owncloud_installed)
     tor_browser_status=$(check_tor_browser_installed)
@@ -909,12 +909,12 @@ while true; do
     thorium_status=$(check_thorium_installed)
 
     # Define the actions based on the installation status
-    if [ "$kali_burpsuite_status" == "Installed" ]; then
-        kali_burpsuite_action="Remove kali_burpsuite (Status: Installed)"
-        kali_burpsuite_description="A web hack application"
+    if [ "$burpsuite_status" == "Installed" ]; then
+        burpsuite_action="Remove burpsuite (Status: Installed)"
+        burpsuite_description="A web hack application"
     else
-        kali_burpsuite_action="Install kali_burpsuite (Status: Not Installed)"
-        kali_burpsuite_description="A web hack application"
+        burpsuite_action="Install burpsuite (Status: Not Installed)"
+        burpsuite_description="A web hack application"
     fi
 
     if [ "$miniforge_status" == "Installed" ]; then
@@ -1190,7 +1190,7 @@ choice=$(zenity --list --radiolist \
     --title="App Installer" \
     --text="Select an action:" \
     --column="Select" --column="Action" --column="Description" \
-    FALSE "$kali_burpsuite_action" "$kali_burpsuite_description" \
+    FALSE "$burpsuite_action" "$burpsuite_description" \
     FALSE "$miniforge_action" "$miniforge_description" \
     FALSE "$owncloud_action" "$owncloud_description" \
     FALSE "$tor_browser_action" "$tor_browser_description" \
@@ -1234,11 +1234,11 @@ choice=$(zenity --list --radiolist \
 
     # Execute the selected action
     case $choice in
-        "$kali_burpsuite_action")
-            if [ "$kali_burpsuite_status" == "Installed" ]; then
-                remove_kali_burpsuite
+        "$burpsuite_action")
+            if [ "$burpsuite_status" == "Installed" ]; then
+                remove_burpsuite
             else
-                install_kali_burpsuite
+                install_burpsuite
             fi
             ;;
         "$miniforge_action")
