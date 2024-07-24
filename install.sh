@@ -318,7 +318,7 @@ check_thorium_installed() {
 }
 
 install_burpsuite(){
-    "$script_dir/install_burpsuite"
+    "$script_dir/install_burpsuite.sh"
     zenity --info --title="Installation Complete" --text="burpsuite has been installed successfully."
 }
 
