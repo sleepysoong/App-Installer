@@ -7,6 +7,7 @@ proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 curl -L -o burpsuite_community_linux_arm64.sh 'https://portswigger.net/burp/releases/startdownload?product=community&version=2024.5.5&type=linuxarm64'
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 chmod +x burpsuite_community_linux_arm64.sh
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo ./burpsuite_community_linux_arm64.sh
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm ./burpsuite_community_linux_arm64.sh
 
 echo "[Desktop Entry]
 Version=1.0
