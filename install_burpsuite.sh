@@ -22,3 +22,5 @@ Categories=Development;
 
 chmod +x $HOME/Desktop/$appname.desktop
 cp $HOME/Desktop/$appname.desktop $PREFIX/share/applications/
+
+echo "alias burpsuite='proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 /opt/BurpSuiteCommunity/BurpSuiteCommunity'" >> $PREFIX/etc/bash.bashrc
