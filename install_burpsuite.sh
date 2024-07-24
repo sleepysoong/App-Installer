@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/BackTrack/home/*)
+varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 appname="burpsuite"
 
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt update

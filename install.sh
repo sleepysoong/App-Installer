@@ -492,7 +492,7 @@ install_thorium() {
 
 remove_burpsuite() {
     if [ -e "$burpsuite_desktop" ]; then
-        proot-distro login BackTrack --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo /home/$varname/BurpSuiteCommunity/uninstall
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo /home/$varname/BurpSuiteCommunity/uninstall
         rm "$HOME/Desktop/burpsuite.desktop"
         rm "$burpsuite_desktop"
         zenity --info --title="Removal Complete" --text="burpsuite has been removed successfully."
