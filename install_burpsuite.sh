@@ -21,4 +21,4 @@ Categories=Development;
 " > $HOME/Desktop/$appname.desktop
 
 chmod +x $HOME/Desktop/$appname.desktop
-cp $HOME/Desktop/$appname.desktop $PREFIX/share/applications/$appname.desktop 
+cp $HOME/Desktop/$appname.desktop $PREFIX/share/applications/
