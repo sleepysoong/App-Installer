@@ -515,6 +515,9 @@ remove_owncloud() {
 
 remove_tor_browser() {
     if [ -e "$tor_desktop" ]; then
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge firefox-esr -y
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo add-apt-repository --remove ppa:mozillateam/ppa
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt update
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf tor-browser
         rm "$HOME/Desktop/tor.desktop"
         rm "$tor_desktop"
