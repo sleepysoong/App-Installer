@@ -21,7 +21,7 @@ notion_desktop="$PREFIX/share/applications/notion.desktop"
 pycharm_desktop="$PREFIX/share/applications/pycharm.desktop"
 thunderbird_desktop="$PREFIX/share/applications/thunderbird.desktop"
 shatteredpd_desktop="$PREFIX/share/applications/shatteredpd.desktop"
-el_desktop="$PREFIX/share/applications/el.desktop"
+sasm_desktop="$PREFIX/share/applications/sasm.desktop"
 librewolf_desktop="$PREFIX/share/applications/librewolf.desktop"
 unciv_desktop="$PREFIX/share/applications/unciv.desktop"
 element_desktop="$PREFIX/share/applications/element.desktop"
@@ -165,7 +165,7 @@ check_shatteredpd_installed() {
 
 
 check_sasm_installed() {
-    if [ -e "$el_desktop" ]; then
+    if [ -e "$sasm_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -188,7 +188,7 @@ check_unciv_installed() {
     fi
 }
 
-check_sasmement_installed() {
+check_element_installed() {
     if [ -e "$element_desktop" ]; then
         echo "Installed"
     else
@@ -394,7 +394,7 @@ install_shatteredpd() {
 
 install_sasm() {
     "$script_dir/install_sasm.sh"
-    zenity --info --title="Installation Complete" --text="Eternal Lands has been installed successfully."
+    zenity --info --title="Installation Complete" --text="sasm has been installed successfully."
 }
 
 install_librewolf() {
@@ -407,8 +407,8 @@ install_unciv() {
     zenity --info --title="Installation Complete" --text="Unciv has been installed successfully."
 }
 
-install_sasmement() {
-    "$script_dir/install_sasmement.sh"
+install_element() {
+    "$script_dir/install_element.sh"
     zenity --info --title="Installation Complete" --text="Element has been installed successfully."
 }
 
@@ -676,13 +676,13 @@ remove_shatteredpd() {
 }
 
 remove_sasm() {
-    if [ -e "$el_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf eternallands
-        rm "$HOME/Desktop/el.desktop"
-        rm "$el_desktop"
-        zenity --info --title="Removal Complete" --text="Eternal Lands has been removed successfully."
+    if [ -e "$sasm_desktop" ]; then
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge sasm*
+        rm "$HOME/Desktop/sasm.desktop"
+        rm "$sasm_desktop"
+        zenity --info --title="Removal Complete" --text="sasm has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="Eternal Lands is not installed."
+        zenity --error --title="Removal Error" --text="sasm is not installed."
     fi
 }
 
@@ -708,7 +708,7 @@ remove_unciv() {
     fi
 }
 
-remove_sasmement() {
+remove_element() {
     if [ -e "$element_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove element-desktop -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
@@ -891,10 +891,10 @@ while true; do
     pycharm_status=$(check_pycharm_installed)
     thunderbird_status=$(check_thunderbird_installed)
     shatteredpd_status=$(check_shatteredpd_installed)
-    el_status=$(check_sasm_installed)
+    sasm_status=$(check_sasm_installed)
     librewolf_status=$(check_librewolf_installed)
     unciv_status=$(check_unciv_installed)
-    element_status=$(check_sasmement_installed)
+    element_status=$(check_element_installed)
     prism_status=$(check_prism_installed)
     wine_status=$(check_wine_installed)
     runelite_status=$(check_runelite_installed)
@@ -1033,12 +1033,12 @@ while true; do
         shatteredpd_description="A traditional roguelike dungeon crawler RPG"
     fi
 
-    if [ "$el_status" == "Installed" ]; then
-        el_action="Remove Eternal Lands (Status: Installed)"
-        el_description="A FREE 3D fantasy MMORPG "
+    if [ "$sasm_status" == "Installed" ]; then
+        sasm_action="Remove sasm (Status: Installed)"
+        sasm_description="disasseblie "
     else
-        el_action="Install Eternal Lands (Status: Not Installed)"
-        el_description="A FREE 3D fantasy MMORPG "
+        sasm_action="Install sasm (Status: Not Installed)"
+        sasm_description="disasseblie "
     fi
 
     if [ "$librewolf_status" == "Installed" ]; then
@@ -1208,7 +1208,7 @@ choice=$(zenity --list --radiolist \
     FALSE "$pycharm_action" "$pycharm_description" \
     FALSE "$thunderbird_action" "$thunderbird_description" \
     FALSE "$shatteredpd_action" "$shatteredpd_description" \
-    FALSE "$el_action" "$el_description" \
+    FALSE "$sasm_action" "$sasm_description" \
     FALSE "$librewolf_action" "$librewolf_description" \
     FALSE "$unciv_action" "$unciv_description" \
     FALSE "$element_action" "$element_description" \
@@ -1342,8 +1342,8 @@ choice=$(zenity --list --radiolist \
                 install_shatteredpd
             fi
             ;;   
-        "$el_action")
-            if [ "$el_status" == "Installed" ]; then
+        "$sasm_action")
+            if [ "$sasm_status" == "Installed" ]; then
                 remove_sasm
             else
                 install_sasm
@@ -1365,9 +1365,9 @@ choice=$(zenity --list --radiolist \
             ;; 
         "$element_action")
             if [ "$element_status" == "Installed" ]; then
-                remove_sasmement
+                remove_element
             else
-                install_sasmement
+                install_element
             fi
             ;;   
         "$prism_action")
