@@ -1,24 +1,23 @@
 #!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 wget https://www.eternal-lands.com/EternalLands-Linux-Installer_1.9.6.1.sh
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 chmod +x EternalLands-Linux-Installer_1.9.6.1.sh
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 xfce4-terminal -e ./EternalLands-Linux-Installer_1.9.6.1.sh
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm EternalLands-Linux-Installer_1.9.6.1.sh
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sed -i 's/noble/mantic/' $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list 
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt update
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt install sasm -y
 
 # Create the desktop entry
 echo "[Desktop Entry]
-Version=1.0
 Type=Application
-Name=Eternal Lands
-Comment=
-Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 eternallands/./eternallands.sh 
-Icon=eternallands
-Categories=Game;
+Name=sasm
+GenericName=sasm
+Comment=sasm
+Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sasm
+Categories=Development;
+Icon=sasm
 Path=
 Terminal=false
-StartupNotify=true
-" > $HOME/Desktop/el.desktop
+StartupNotify=false
+" > $HOME/Desktop/sasm.desktop
 
-chmod +x $HOME/Desktop/el.desktop
-cp $HOME/Desktop/el.desktop $HOME/../usr/share/applications/el.desktop
+chmod +x $HOME/Desktop/sasm.desktop
+cp $HOME/Desktop/sasm.desktop $PREFIX/share/applications/sasm.desktop

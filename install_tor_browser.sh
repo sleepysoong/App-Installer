@@ -1,8 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-cd
-
 # Installation steps for Tor Browser
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install software-properties-common
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S add-apt-repository ppa:mozillateam/ppa
