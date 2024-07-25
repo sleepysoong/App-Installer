@@ -164,7 +164,7 @@ check_shatteredpd_installed() {
 }
 
 
-check_el_installed() {
+check_sasm_installed() {
     if [ -e "$el_desktop" ]; then
         echo "Installed"
     else
@@ -188,7 +188,7 @@ check_unciv_installed() {
     fi
 }
 
-check_element_installed() {
+check_sasmement_installed() {
     if [ -e "$element_desktop" ]; then
         echo "Installed"
     else
@@ -392,8 +392,8 @@ install_shatteredpd() {
     zenity --info --title="Installation Complete" --text="Shattered Pixel Dungeon has been installed successfully."
 }
 
-install_el() {
-    "$script_dir/install_el.sh"
+install_sasm() {
+    "$script_dir/install_sasm.sh"
     zenity --info --title="Installation Complete" --text="Eternal Lands has been installed successfully."
 }
 
@@ -407,8 +407,8 @@ install_unciv() {
     zenity --info --title="Installation Complete" --text="Unciv has been installed successfully."
 }
 
-install_element() {
-    "$script_dir/install_element.sh"
+install_sasmement() {
+    "$script_dir/install_sasmement.sh"
     zenity --info --title="Installation Complete" --text="Element has been installed successfully."
 }
 
@@ -672,7 +672,7 @@ remove_shatteredpd() {
     fi
 }
 
-remove_el() {
+remove_sasm() {
     if [ -e "$el_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf eternallands
         rm "$HOME/Desktop/el.desktop"
@@ -705,7 +705,7 @@ remove_unciv() {
     fi
 }
 
-remove_element() {
+remove_sasmement() {
     if [ -e "$element_desktop" ]; then
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt remove element-desktop -y
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt autoremove -y
@@ -888,10 +888,10 @@ while true; do
     pycharm_status=$(check_pycharm_installed)
     thunderbird_status=$(check_thunderbird_installed)
     shatteredpd_status=$(check_shatteredpd_installed)
-    el_status=$(check_el_installed)
+    el_status=$(check_sasm_installed)
     librewolf_status=$(check_librewolf_installed)
     unciv_status=$(check_unciv_installed)
-    element_status=$(check_element_installed)
+    element_status=$(check_sasmement_installed)
     prism_status=$(check_prism_installed)
     wine_status=$(check_wine_installed)
     runelite_status=$(check_runelite_installed)
@@ -1341,9 +1341,9 @@ choice=$(zenity --list --radiolist \
             ;;   
         "$el_action")
             if [ "$el_status" == "Installed" ]; then
-                remove_el
+                remove_sasm
             else
-                install_el
+                install_sasm
             fi
             ;;   
             "$librewolf_action")
@@ -1362,9 +1362,9 @@ choice=$(zenity --list --radiolist \
             ;; 
         "$element_action")
             if [ "$element_status" == "Installed" ]; then
-                remove_element
+                remove_sasmement
             else
-                install_element
+                install_sasmement
             fi
             ;;   
         "$prism_action")
