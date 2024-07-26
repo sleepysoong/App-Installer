@@ -18,7 +18,7 @@ libreoffice_desktop="$PREFIX/share/applications/libreoffice-base.desktop"
 code_desktop="$PREFIX/share/applications/code.desktop"
 vlc_desktop="$PREFIX/share/applications/vlc.desktop"
 notion_desktop="$PREFIX/share/applications/notion.desktop"
-pycharm_desktop="$PREFIX/share/applications/pycharm.desktop"
+nautilus_desktop="$PREFIX/share/applications/nautilus.desktop"
 thunderbird_desktop="$PREFIX/share/applications/thunderbird.desktop"
 shatteredpd_desktop="$PREFIX/share/applications/shatteredpd.desktop"
 sasm_desktop="$PREFIX/share/applications/sasm.desktop"
@@ -139,8 +139,8 @@ check_notion_installed() {
     fi
 }
 
-check_pycharm_installed() {
-    if [ -e "$pycharm_desktop" ]; then
+check_nautilus_installed() {
+    if [ -e "$nautilus_desktop" ]; then
         echo "Installed"
     else
         echo "Not Installed"
@@ -377,9 +377,9 @@ install_notion() {
     zenity --info --title="Installation Complete" --text="Notion has been installed successfully."
 }
 
-install_pycharm() {
-    "$script_dir/install_pycharm.sh"
-    zenity --info --title="Installation Complete" --text="PyCharm has been installed successfully."
+install_nautilus() {
+    "$script_dir/install_nautilus.sh"
+    zenity --info --title="Installation Complete" --text="nautilus has been installed successfully."
 }
 
 install_thunderbird() {
@@ -636,14 +636,14 @@ remove_notion() {
     fi
 }
 
-remove_pycharm() {
-    if [ -e "$pycharm_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf /opt/pycharm-community
-        rm "$HOME/Desktop/pycharm.desktop"
-        rm "$pycharm_desktop"
-        zenity --info --title="Removal Complete" --text="PyCharm has been removed successfully."
+remove_nautilus() {
+    if [ -e "$nautilus_desktop" ]; then
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt purge nautilus
+        rm "$HOME/Desktop/nautilus.desktop"
+        rm "$nautilus_desktop"
+        zenity --info --title="Removal Complete" --text="nautilus has been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="PyCharm is not installed."
+        zenity --error --title="Removal Error" --text="nautilus is not installed."
     fi
 }
 
@@ -888,7 +888,7 @@ while true; do
     code_status=$(check_code_installed)
     vlc_status=$(check_vlc_installed)
     notion_status=$(check_notion_installed)
-    pycharm_status=$(check_pycharm_installed)
+    nautilus_status=$(check_nautilus_installed)
     thunderbird_status=$(check_thunderbird_installed)
     shatteredpd_status=$(check_shatteredpd_installed)
     sasm_status=$(check_sasm_installed)
@@ -1009,12 +1009,12 @@ while true; do
         notion_description="A freemium productivity and note-taking web application"
     fi
 
-    if [ "$pycharm_status" == "Installed" ]; then
-        pycharm_action="Remove PyCharm (Status: Installed)"
-        pycharm_description="A Python IDE"
+    if [ "$nautilus_status" == "Installed" ]; then
+        nautilus_action="Remove nautilus (Status: Installed)"
+        nautilus_description="A linux explorer"
     else
-        pycharm_action="Install PyCharm (Status: Not Installed)"
-        pycharm_description="A Python IDE"
+        nautilus_action="Install nautilus (Status: Not Installed)"
+        nautilus_description="A linux explorer"
     fi
     
     if [ "$thunderbird_status" == "Installed" ]; then
@@ -1205,7 +1205,7 @@ choice=$(zenity --list --radiolist \
     FALSE "$code_action" "$code_description" \
     FALSE "$vlc_action" "$vlc_description" \
     FALSE "$notion_action" "$notion_description" \
-    FALSE "$pycharm_action" "$pycharm_description" \
+    FALSE "$nautilus_action" "$nautilus_description" \
     FALSE "$thunderbird_action" "$thunderbird_description" \
     FALSE "$shatteredpd_action" "$shatteredpd_description" \
     FALSE "$sasm_action" "$sasm_description" \
@@ -1321,11 +1321,11 @@ choice=$(zenity --list --radiolist \
                 install_notion
             fi
             ;;   
-        "$pycharm_action")
-            if [ "$pycharm_status" == "Installed" ]; then
-                remove_pycharm
+        "$nautilus_action")
+            if [ "$nautilus_status" == "Installed" ]; then
+                remove_nautilus
             else
-                install_pycharm
+                install_nautilus
             fi
             ;;   
         "$thunderbird_action")
