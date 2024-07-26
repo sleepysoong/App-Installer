@@ -24,7 +24,7 @@ Version=1.0
 Type=Application
 Name=Wine 64 Desktop
 Comment=
-Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 box64 wine explorer /desktop=shell,1024x768 explorer.exe
+Exec=prun wine explorer /desktop=shell,1024x768 explorer.exe
 Icon=windows95
 Categories=Game;
 Path=
