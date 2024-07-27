@@ -58,13 +58,13 @@ chmod +x winetricks
 mv winetricks /usr/local/bin/
 
 echo '#!/bin/bash
-export BOX86_NOBANNER=1 WINE=wine WINEPREFIX=~/.wine32 WINESERVER=~/wine32/bin/wineserver
+export BOX86_NOBANNER=1 WINE=wine32 WINEPREFIX=~/.wine32 WINESERVER=~/wine32/bin/wineserver
 /usr/local/bin/winetricks "$@"' > /usr/local/bin/winetricks32
 
 chmod +x /usr/local/bin/winetricks32
 
 echo '#!/bin/bash
-export BOX64_NOBANNER=1 WINE=wine64 WINEPREFIX=~/.wine WINESERVER=~/wine64/bin/wineserver
+export BOX64_NOBANNER=1 WINE=wine64 WINEPREFIX=~/.wine64 WINESERVER=~/wine64/bin/wineserver
 /usr/local/bin/winetricks "$@"' > /usr/local/bin/winetricks64
 
 chmod +x /usr/local/bin/winetricks64
