@@ -36,7 +36,7 @@ chmod +x /usr/local/bin/wine32
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine64
 export DISPLAY=:1
-box64 '"$HOME/wine/bin/wine64 "'"$@"' > /usr/local/bin/wine64
+box64 '"$HOME/wine64/bin/wine64 "'"$@"' > /usr/local/bin/wine64
 chmod +x /usr/local/bin/wine64
 
 echo '
