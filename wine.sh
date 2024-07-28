@@ -19,13 +19,13 @@ sudo apt install box86-android:armhf -y
 sudo apt install nano cabextract libfreetype6 libfreetype6:armhf libfontconfig libfontconfig:armhf libxext6 libxext6:armhf libxinerama-dev libxinerama-dev:armhf libxxf86vm1 libxxf86vm1:armhf libxrender1 libxrender1:armhf libxcomposite1 libxcomposite1:armhf libxrandr2 libxrandr2:armhf libxi6 libxi6:armhf libxcursor1 libxcursor1:armhf libvulkan-dev libvulkan-dev:armhf -y
 
 cd ~/
-wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.7/wine-9.7-amd64.tar.xz
-wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.7/wine-9.7-x86.tar.xz
-tar xvf wine-9.7-amd64.tar.xz
-tar xvf wine-9.7-x86.tar.xz
-rm wine-9.7-amd64.tar.xz wine-9.7-x86.tar.xz
-mv wine-9.7-amd64 wine64
-mv wine-9.7-x86 wine32
+wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.12/wine-9.12-amd64.tar.xz
+wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.12/wine-9.12-x86.tar.xz
+tar xvf wine-9.12-amd64.tar.xz
+tar xvf wine-9.12-x86.tar.xz
+rm wine-9.12-amd64.tar.xz wine-9.12-x86.tar.xz
+mv wine-9.12-amd64 wine64
+mv wine-9.12-x86 wine32
 
 echo '#!/bin/bash 
 export WINEPREFIX=~/.wine32
@@ -46,7 +46,6 @@ export BOX64_PATH=~/wine64/bin/
 export BOX64_LD_LIBRARY_PATH=~/wine64/lib/i386-unix/:~/wine64/lib/wine/x86_64-unix/:/lib/i386-linux-gnu/:/lib/x86_64-linux-gnu:/lib/aarch64-linux-gnu/:/lib/arm-linux-gnueabihf/:/usr/lib/aarch64-linux-gnu/:/usr/lib/arm-linux-gnueabihf/:/usr/lib/i386-linux-gnu/:/usr/lib/x86_64-linux-gnu' >> ~/.bashrc
 
 source ~/.bashrc
-
 
 WINEPREFIX=~/.wine32 box86 wine32 winecfg
 WINEPREFIX=~/.wine64 box64 wine64 winecfg
@@ -71,12 +70,16 @@ chmod +x /usr/local/bin/winetricks64
 
 sudo apt install mesa-vulkan-drivers mesa-vulkan-drivers:armhf libvulkan1 libvulkan1:armhf -y
 
-tar xvf dxvk-2.3.1.tar.gz
+wget https://github.com/doitsujin/dxvk/releases/download/v2.4/dxvk-2.4.tar.gz
+tar xvf dxvk-2.4.tar.gz
+rm -f dxvk-2.4.tar.gz
 
 cd 
-cp ~/dxvk-2.3.1/x32/* ~/.wine32/drive_c/windows/system32
-cp ~/dxvk-2.3.1/x32/* ~/.wine64/drive_c/windows/system32
-cp ~/dxvk-2.3.1/x64/* ~/.wine64/drive_c/windows/syswow64
+cp ~/dxvk-2.4/x32/* ~/.wine32/drive_c/windows/system32
+cp ~/dxvk-2.4/x32/* ~/.wine64/drive_c/windows/system32
+cp ~/dxvk-2.4/x64/* ~/.wine64/drive_c/windows/syswow64
 
 wine32 winecfg
 wine64 winecfg
+
+rm -rf ~/dxvk-2.4

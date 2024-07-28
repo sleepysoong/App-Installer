@@ -734,15 +734,16 @@ remove_prism() {
 
 remove_wine() {
     if [ -e "$wine_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine32 wine .wine32 .wine
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine32 wine64 .wine32 .wine64
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine32
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine
+        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine64
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks32
         proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks64
-        #rm "$HOME/Desktop/wine32.desktop"
-        rm "$HOME/Desktop/wine.desktop"
-        rm "$PREFIX/share/applications/wine.desktop"
+        rm "$HOME/Desktop/wine32.desktop"
+        rm "$HOME/Desktop/wine64.desktop"
+        rm "$PREFIX/share/applications/wine32.desktop"
+        rm "$PREFIX/share/applications/wine64.desktop"
         rm "$wine_desktop"
         zenity --info --title="Removal Complete" --text="Box86, Box64 and Wine have been removed successfully."
     else
