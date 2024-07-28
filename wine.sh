@@ -82,4 +82,3 @@ cp ~/dxvk-2.4/x64/* ~/.wine64/drive_c/windows/syswow64
 wine32 winecfg
 wine64 winecfg
 
-rm -rf ~/dxvk-2.4

@@ -34,4 +34,6 @@ StartupNotify=true" > $HOME/Desktop/wine64.desktop
 chmod +x $HOME/Desktop/wine64.desktop
 cp $HOME/Desktop/wine64.desktop $PREFIX/share/applications
 
+rm -rf ~/dxvk-2.4
+
 rm $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/wine.sh
