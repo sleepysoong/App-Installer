@@ -4,7 +4,7 @@ varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 #Install nautilus
 proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt update -y
-proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt install nautilus -y
+proot-distro login --user $varname ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo aptitude install nautilus -y
 
 #Create Desktop Launcher
 

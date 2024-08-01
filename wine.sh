@@ -13,10 +13,10 @@ sudo apt install box64-android -y
 
 dpkg --add-architecture armhf
 sudo apt update -y
-sudo apt install libc6:armhf -y
-sudo apt install box86-android:armhf -y
+sudo aptitude install libc6:armhf -y
+sudo aptitude install box86-android:armhf -y
 
-sudo apt install nano cabextract libfreetype6 libfreetype6:armhf libfontconfig libfontconfig:armhf libxext6 libxext6:armhf libxinerama-dev libxinerama-dev:armhf libxxf86vm1 libxxf86vm1:armhf libxrender1 libxrender1:armhf libxcomposite1 libxcomposite1:armhf libxrandr2 libxrandr2:armhf libxi6 libxi6:armhf libxcursor1 libxcursor1:armhf libvulkan-dev libvulkan-dev:armhf -y
+sudo aptitude install nano cabextract libfreetype6 libfreetype6:armhf libfontconfig libfontconfig:armhf libxext6 libxext6:armhf libxinerama-dev libxinerama-dev:armhf libxxf86vm1 libxxf86vm1:armhf libxrender1 libxrender1:armhf libxcomposite1 libxcomposite1:armhf libxrandr2 libxrandr2:armhf libxi6 libxi6:armhf libxcursor1 libxcursor1:armhf libvulkan-dev libvulkan-dev:armhf -y
 
 cd ~/
 wget https://github.com/Kron4ek/Wine-Builds/releases/download/9.12/wine-9.12-amd64.tar.xz

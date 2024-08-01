@@ -2,10 +2,10 @@
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
 # Installation steps for Tor Browser
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install software-properties-common
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S aptitude install software-properties-common
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S add-apt-repository ppa:mozillateam/ppa
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt update
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install firefox-esr -y
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo -S aptitude install firefox-esr -y
 echo -e "\nmozillateam에서 rsa1024 warning을 해결하고 있다고 합니다.(3개월전 글에서 확인....) 그대로 쓰면 자동으로 업그레이드 될듯 합니다."
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 curl -LO https://sourceforge.net/projects/tor-browser-ports/files/13.0.9/tor-browser-linux-arm64-13.0.9.tar.xz/download tor.tar.xz
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 mv download tor.tar.xz
