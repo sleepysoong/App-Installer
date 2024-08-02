@@ -36,7 +36,7 @@ done
 
 if [ "$install" = true ]; then
     download="wget $url"
-    install="prun sudo aptitude install -y "
+    install="prun sudo apt install -y "
 
     varname=$(basename $HOME/../usr/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
     prun="proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 $@"
