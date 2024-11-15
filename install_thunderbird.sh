@@ -6,6 +6,7 @@ proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sed -
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo apt update
 proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sudo aptitude install thunderbird -y
 #proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sed -i 's/mantic/noble/g' $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list 
+proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 sed -i 's/mantic/noble/' $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/etc/apt/sources.list 
 
 cp $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/usr/share/applications/thunderbird.desktop $PREFIX/share/applications
 sed -i "s/^Exec=\(.*\)$/Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 \1/"   $PREFIX/share/applications/thunderbird.desktop
