@@ -12,7 +12,7 @@ proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm ./
 echo "[Desktop Entry]
 Version=1.0
 Name=$appname
-Exec=proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 /opt/BurpSuiteCommunity/BurpSuiteCommunity --no-sandbox
+Exec=prun BurpSuiteCommunity
 StartupNotify=true
 Terminal=true
 Icon=$appname
@@ -22,5 +22,3 @@ Categories=Development;
 
 chmod +x $HOME/Desktop/$appname.desktop
 cp $HOME/Desktop/$appname.desktop $PREFIX/share/applications/
-
-echo "alias burpsuite='proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 /opt/BurpSuiteCommunity/BurpSuiteCommunity'" >> $PREFIX/etc/bash.bashrc
