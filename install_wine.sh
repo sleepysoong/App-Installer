@@ -1,39 +1,37 @@
-#!/data/data/com.termux/files/usr/bin/bash
-
-varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
-
-cp $HOME/.App-Installer/wine.sh $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname
-proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 ./wine.sh
-
-echo "[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Wine 32 Desktop
-Comment=
-Exec=prun wine32 explorer /desktop=shell,1024x768 explorer.exe
-Icon=windows95
-Categories=Game;
-Path=
-Terminal=false
-StartupNotify=true" > $HOME/Desktop/wine32.desktop
-
-chmod +x $HOME/Desktop/wine32.desktop
-cp $HOME/Desktop/wine32.desktop $PREFIX/share/applications
-
-echo "[Desktop Entry]
-Version=1.0
-Type=Application
-Name=Wine 64 Desktop
-Comment=
-Exec=prun wine64 explorer /desktop=shell,1024x768 explorer.exe
-Icon=windows95
-Categories=Game;
-Path=
-Terminal=true
-StartupNotify=true" > $HOME/Desktop/wine64.desktop
-chmod +x $HOME/Desktop/wine64.desktop
-cp $HOME/Desktop/wine64.desktop $PREFIX/share/applications
-
-rm -rf ~/dxvk-2.4
-
-rm $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/$varname/wine.sh
+##!/data/data/com.termux/files/usr/bin/bash
+pkg update 
+pkg upgrade -y
+pkg install -y tur-repo
+pkg install -y \
+    freetype gnutls libandroid-shmem-static \
+    libx11 xorgproto libdrm libpixman libxfixes libjpeg-turbo \
+    mesa-demos osmesa pulseaudio termux-x11-nightly vulkan-tools xtrans \
+    libxxf86vm xorg-xrandr xorg-font-util xorg-util-macros libxfont2 \
+    libxkbfile libpciaccess xcb-util-renderutil xcb-util-image \
+    xcb-util-keysyms xcb-util-wm xorg-xkbcomp xkeyboard-config \
+    libxdamage libxinerama libxshmfence mousepad stracer
+pkg install -y vulkan-tools vulkan-loader-android mesa-zink
+pkg install -y mesa-vulkan-icd-freedreno mesa-zink
+pkg install -y glibc-repo
+pkg install -y glibc-runner
+pkg install -y mesa-vulkan-icd-freedreno-glibc mangohud-glibc \ 
+    mesa-zink-glibc box64-glibc vulkan-volk-glibc
+pkg install -y \
+    libxcb-glibc libxcomposite-glibc libxcursor-glibc libxfixes-glibc \
+    libxrender-glibc libgcrypt-glibc libgpg-error-glibc libice-glibc \
+    libsm-glibc libxau-glibc libxcrypt-glibc libxdmcp-glibc \
+    libxext-glibc libxinerama-glibc libxkbfile-glibc libxml2-glibc
+pkg install -y pulseaudio-glibc libx*-*glibc*
+pkg install -y libgmp-glibc
+pkg install -y fex
+pkg install -y mesa-zink-dev virglrenderer-mesa-zink* virgl_test_server*  \
+    libandroid-shmem-static libx11 xorgproto libdrm libpixman libxfixes \
+    libjpeg-turbo \
+    xtrans libxxf86vm xorg-xrandr xorg-font-util xorg-util-macros libxfont2 \
+    libxkbfile libpciaccess xcb-util-renderutil xcb-util-image xcb-util-keysyms \
+    xcb-util-wm xorg-xkbcomp xkeyboard-config libxdamage libxinerama libxshmfence
+pkg install -y virglrenderer-mesa-zink box64-glibc vulkan-volk-glibc
+pip install psutil
+sleep 1
+apt autoclean -y
+apt autoremove -y
