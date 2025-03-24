@@ -209,7 +209,7 @@ install_sasm() {
 
 install_wine() {
     "$script_dir/install_wine.sh"
-    zenity --info --title="Installation Complete" --text="Box86, Box64 and Wine has been installed successfully."
+    zenity --info --title="Installation Complete" --text="hangover-wine has been installed successfully."
 }
 
 install_onepassword() {
@@ -369,20 +369,9 @@ remove_sasm() {
 
 remove_wine() {
     if [ -e "$wine_desktop" ]; then
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm -rf wine32 wine64 .wine32 .wine64
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine32
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/wine64
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks32
-        proot-distro login ubuntu --user $varname --shared-tmp -- env DISPLAY=:1.0 rm /usr/local/bin/winetricks64
-        rm "$HOME/Desktop/wine32.desktop"
-        rm "$HOME/Desktop/wine64.desktop"
-        rm "$PREFIX/share/applications/wine32.desktop"
-        rm "$PREFIX/share/applications/wine64.desktop"
-        rm "$wine_desktop"
-        zenity --info --title="Removal Complete" --text="Box86, Box64 and Wine have been removed successfully."
+        zenity --info --title="Removal Complete" --text="hangover-wine have been removed successfully."
     else
-        zenity --error --title="Removal Error" --text="Box86, Box64 and Wine are not installed."
+        zenity --error --title="Removal Error" --text="hangover-wine are not installed."
     fi
 }
 
@@ -528,10 +517,10 @@ while true; do
     fi
 
     if [ "$wine_status" == "Installed" ]; then
-        wine_action="Remove Box86, Box64 and Wine (Status: Installed)"
+        wine_action="Remove hangover-wine (Status: Installed)"
         wine_description="lets you run x86_64 Linux and Windows programs"
     else
-        wine_action="Install Box86, Box64 and Wine (Status: Not Installed)"
+        wine_action="Install hangover-wine (Status: Not Installed)"
         wine_description="lets you run x86_64 Linux and Windows programs"
     fi
 
