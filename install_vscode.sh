@@ -14,13 +14,12 @@ Version=1.0
 Type=Application
 Name=Visual Studio Code
 Comment=Code Editing. Redefined.
-Exec=prun code --no-sandbox
+Exec=prun code
 Icon=visual-studio-code
 Categories=Development;
 Path=
-Terminal=false
+Terminal=true
 StartupNotify=false
-
 " > $HOME/Desktop/code.desktop
 
 chmod +x $HOME/Desktop/code.desktop
