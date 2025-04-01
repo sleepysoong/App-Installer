@@ -1,12 +1,12 @@
 #!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 apt update
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 wget https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.98.2-1741787947_arm64.deb -O code.deb
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install ./code.deb -y
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 rm code.deb
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo -S apt install gpg software-properties-common apt-transport-https -y
-proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | proot-distro login ubuntu --shared-tmp -- env DISPLAY=:1.0 sudo apt-key add -
+prun apt update
+prun wget https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.98.2-1741787947_arm64.deb -O code.deb
+prun sudo -S apt install ./code.deb -y
+prun rm code.deb
+prun sudo -S apt install gpg software-properties-common apt-transport-https -y
+prun wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | prun sudo apt-key add -
 
 echo "[Desktop Entry]
 Version=1.0
