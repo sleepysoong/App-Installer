@@ -1,6 +1,7 @@
 #!/data/data/com.termux/files/usr/bin/bash
 varname=$(basename $PREFIX/var/lib/proot-distro/installed-rootfs/ubuntu/home/*)
 
+prun sudo apt purge code
 prun apt update
 prun wget https://packages.microsoft.com/repos/code/pool/main/c/code/code_1.98.2-1741787947_arm64.deb -O code.deb
 prun sudo -S dpkg -i ./code.deb
