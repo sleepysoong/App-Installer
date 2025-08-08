@@ -17,12 +17,23 @@ prun bash -lc "set -euo pipefail; \
   echo '기존 `PyCharm` 설치 흔적을 정리할게요.'; \
   \$SUDO rm -f /usr/local/bin/pycharm || true; \
   \$SUDO rm -rf /opt/pycharm-* || true; \
-  echo '압축 파일을 다운로드할게요.'; \
-  wget '$PRJ_URL' -O pycharm.tar.gz; \
+  TAR_PATH=/tmp/pycharm-2025.2-aarch64.tar.gz; \
+  if [ -f "\$TAR_PATH" ]; then \
+    echo '이미 다운로드된 파일을 확인했어요. 무결성을 검사할게요.'; \
+    if tar -tzf "\$TAR_PATH" >/dev/null 2>&1; then \
+      echo '기존 파일을 재사용할게요.'; \
+    else \
+      echo '기존 파일이 손상되었어요. 다시 다운로드할게요.'; \
+      rm -f "\$TAR_PATH"; \
+      wget '$PRJ_URL' -O "\$TAR_PATH"; \
+    fi; \
+  else \
+    echo '압축 파일을 다운로드할게요.'; \
+    wget '$PRJ_URL' -O "\$TAR_PATH"; \
+  fi; \
   echo '/opt 디렉토리에 설치할게요.'; \
   \$SUDO mkdir -p /opt; \
-  \$SUDO tar -xzf ./pycharm.tar.gz -C /opt; \
-  rm -f ./pycharm.tar.gz; \
+  \$SUDO tar -xzf "\$TAR_PATH" -C /opt; \
   latest_dir=\$(ls -d /opt/pycharm-* 2>/dev/null | sort -V | tail -n1); \
   if [ -z "\$latest_dir" ]; then echo '설치 디렉토리를 찾지 못했어요.'; exit 1; fi; \
   echo '실행 심볼릭 링크를 생성할게요.'; \
