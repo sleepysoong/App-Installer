@@ -14,7 +14,7 @@ prun bash -lc "set -euo pipefail; \
   else \
     SUDO=''; \
   fi; \
-  echo '기존 `PyCharm` 설치 흔적을 정리할게요.'; \
+  echo '기존 PyCharm 설치 흔적을 정리할게요.'; \
   \$SUDO rm -f /usr/local/bin/pycharm || true; \
   \$SUDO rm -rf /opt/pycharm-* || true; \
   TAR_PATH=/tmp/pycharm-2025.2-aarch64.tar.gz; \
@@ -28,7 +28,7 @@ prun bash -lc "set -euo pipefail; \
       wget '$PRJ_URL' -O "\$TAR_PATH"; \
     fi; \
   else \
-    echo '압축 파일을 다운로드할게요.'; \
+  echo '압축 파일을 다운로드할게요.'; \
     wget '$PRJ_URL' -O "\$TAR_PATH"; \
   fi; \
   echo '/opt 디렉토리에 설치할게요.'; \
